@@ -2,15 +2,13 @@ import React from "react";
 
 import Timer from "./Timer";
 
-const TimerList = () => {
+const TimerList = ({ timers }) => {
   return (
     <div className="timer-container">
       <ul className="timer-list">
-        <Timer />
-        <Timer />
-        <Timer />
-        <Timer />
-        <Timer />
+        {timers.map((timer) => (
+          <Timer key={timer.id} timer={timer} />
+        ))}
       </ul>
     </div>
   );

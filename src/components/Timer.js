@@ -1,9 +1,9 @@
 import React from "react";
 
-const Timer = () => {
+const Timer = ({ timer }) => {
   return (
     <div className="timer">
-      <li className="timer-item">Timer</li>
+      <li className="timer-item">{timer.name}</li>
       <li>00:00</li>
       <button className="start-btn">
         <i className="fas fa-stopwatch"></i>
