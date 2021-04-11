@@ -5,11 +5,18 @@ const Form = ({ timerName, setTimerName, timers, setTimers }) => {
     console.log(e.target.value);
     setTimerName(e.target.value);
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
     setTimers([
       ...timers,
-      { name: timerName, time: 0, id: new Date().getTime().toString() },
+      {
+        name: timerName,
+        h: 0,
+        m: 0,
+        s: 0,
+        id: new Date().getTime().toString(),
+      },
     ]);
     setTimerName("");
   };
