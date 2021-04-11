@@ -1,6 +1,10 @@
 import React from "react";
 
-const Timer = ({ timer }) => {
+const Timer = ({ timer, timers, setTimers }) => {
+  const deleteHandler = () => {
+    setTimers(timers.filter((t) => t.id !== timer.id));
+  };
+
   return (
     <div className="timer">
       <li className="timer-item">{timer.name}</li>
@@ -8,7 +12,7 @@ const Timer = ({ timer }) => {
       <button className="start-btn">
         <i className="fas fa-stopwatch"></i>
       </button>
-      <button className="trash-btn">
+      <button onClick={deleteHandler} className="trash-btn">
         <i className="fas fa-trash"></i>
       </button>
     </div>

@@ -28,7 +28,7 @@ function App() {
         timerName={timerName}
         setTimerName={setTimerName}
       />
-      <TimerList timers={timers} />
+      <TimerList setTimers={setTimers} timers={timers} />
     </div>
   );
 }
