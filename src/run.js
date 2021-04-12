@@ -11,8 +11,6 @@ export const setTime = (timer) => {
 };
 
 export const run = (timers, setTimers) => {
-  console.log(updatedSecond);
-
   if (updatedMinute === 60) {
     updatedHour++;
     updatedMinute = 0;
@@ -31,7 +29,6 @@ export const run = (timers, setTimers) => {
           m: updatedMinute,
           h: updatedHour,
         };
-        console.log(updatedItem.s);
         return updatedItem;
       }
       return item;

@@ -3,6 +3,7 @@ import "./App.css";
 
 import Form from "./components/Form";
 import TimerList from "./components/TimerList";
+import { run, setTime } from "./run";
 
 function App() {
   const [timerName, setTimerName] = useState("");

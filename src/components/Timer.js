@@ -1,28 +1,9 @@
-import React, { useState } from "react";
-import { run, setTime } from "./run";
+import React, { useState, useEffect } from "react";
 
-const Timer = ({ timer, timers, setTimers }) => {
-  const [interv, setInterv] = useState();
-  const [started, setStarted] = useState(false);
-
+const Timer = ({ timer, timers, setTimers, startStopTimer }) => {
   const deleteHandler = () => {
     setTimers(timers.filter((t) => t.id !== timer.id));
-  };
-
-  const startHandler = () => {
-    setTime(timer);
-
-    setInterv(
-      setInterval(() => {
-        run(timers, setTimers);
-      }, 1000)
-    );
-    setStarted(true);
-  };
-
-  const stopHandler = () => {
-    clearInterval(interv);
-    setStarted(false);
+    startStopTimer(timer, true);
   };
 
   const displayTime = () => {
@@ -32,12 +13,18 @@ const Timer = ({ timer, timers, setTimers }) => {
     return h + ":" + m + ":" + s;
   };
 
+  useEffect(() => {
+    console.log(startStopTimer);
+  }, []);
+
   return (
     <div className="timer">
       <li className="timer-item">{timer.name}</li>
       <li>{displayTime()}</li>
       <button
-        onClick={started ? stopHandler : startHandler}
+        onClick={() => {
+          startStopTimer(timer);
+        }}
         className="start-btn"
       >
         <i className="fas fa-stopwatch"></i>

@@ -2,7 +2,6 @@ import React from "react";
 
 const Form = ({ timerName, setTimerName, timers, setTimers }) => {
   const inputTextHandler = (e) => {
-    console.log(e.target.value);
     setTimerName(e.target.value);
   };
 
@@ -15,7 +14,7 @@ const Form = ({ timerName, setTimerName, timers, setTimers }) => {
         h: 0,
         m: 0,
         s: 0,
-        id: new Date().getTime().toString(),
+        id: new Date().getTime(),
       },
     ]);
     setTimerName("");
