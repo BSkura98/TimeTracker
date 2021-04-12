@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { run, setTime } from "./run";
 
 const Timer = ({ timer, timers, setTimers }) => {
   const [interv, setInterv] = useState();
@@ -9,7 +10,13 @@ const Timer = ({ timer, timers, setTimers }) => {
   };
 
   const startHandler = () => {
-    setInterv(setInterval(run, 1000));
+    setTime(timer);
+
+    setInterv(
+      setInterval(() => {
+        run(timers, setTimers);
+      }, 1000)
+    );
     setStarted(true);
   };
 
@@ -23,35 +30,6 @@ const Timer = ({ timer, timers, setTimers }) => {
     let m = timer.m >= 10 ? timer.m : "0" + timer.m;
     let s = timer.s >= 10 ? timer.s : "0" + timer.s;
     return h + ":" + m + ":" + s;
-  };
-
-  var updatedSecond = timer.s,
-    updatedMinute = timer.m,
-    updatedHour = timer.h;
-  const run = () => {
-    if (updatedMinute === 60) {
-      updatedHour++;
-      updatedMinute = 0;
-    }
-    if (updatedSecond === 60) {
-      updatedMinute++;
-      updatedSecond = 0;
-    }
-    updatedSecond++;
-    return setTimers(
-      timers.map((item) => {
-        if (item.id === timer.id) {
-          const updatedItem = {
-            ...item,
-            s: updatedSecond,
-            m: updatedMinute,
-            h: updatedHour,
-          };
-          return updatedItem;
-        }
-        return item;
-      })
-    );
   };
 
   return (
