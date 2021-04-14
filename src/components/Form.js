@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 
-const Form = ({ timerName, setTimerName, timers, setTimers }) => {
+import { TimerContext } from "../App";
+
+const Form = ({ timerName, setTimerName }) => {
+  const { timers, setTimers } = useContext(TimerContext);
+
   const inputTextHandler = (e) => {
     setTimerName(e.target.value);
   };

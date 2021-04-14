@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
-const Timer = ({ timer, timers, setTimers, startStopTimer }) => {
+import { TimerContext } from "../App";
+
+const Timer = ({ timer }) => {
+  const { timers, setTimers, startStopTimer } = useContext(TimerContext);
+
   const deleteHandler = () => {
     setTimers(timers.filter((t) => t.id !== timer.id));
     startStopTimer(timer, true);
