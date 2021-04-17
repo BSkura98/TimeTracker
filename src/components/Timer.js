@@ -3,10 +3,11 @@ import React, { useEffect, useContext } from "react";
 import { TimerContext } from "../App";
 
 const Timer = ({ timer }) => {
-  const { timers, setTimers, startStopTimer } = useContext(TimerContext);
+  const { startStopTimer, dispatch } = useContext(TimerContext);
 
   const deleteHandler = () => {
-    setTimers(timers.filter((t) => t.id !== timer.id));
+    dispatch({ type: "REMOVE_TIMER", payload: timer });
+    //setTimers(timers.filter((t) => t.id !== timer.id));
     startStopTimer(timer, true);
   };
 
@@ -16,10 +17,6 @@ const Timer = ({ timer }) => {
     let s = timer.s >= 10 ? timer.s : "0" + timer.s;
     return h + ":" + m + ":" + s;
   };
-
-  useEffect(() => {
-    console.log(startStopTimer);
-  }, []);
 
   return (
     <div className="timer">

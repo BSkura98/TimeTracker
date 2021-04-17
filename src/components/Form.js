@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { TimerContext } from "../App";
 
 const Form = ({ timerName, setTimerName }) => {
-  const { timers, setTimers } = useContext(TimerContext);
+  const { dispatch } = useContext(TimerContext);
 
   const inputTextHandler = (e) => {
     setTimerName(e.target.value);
@@ -11,7 +11,7 @@ const Form = ({ timerName, setTimerName }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setTimers([
+    /*setTimers([
       ...timers,
       {
         name: timerName,
@@ -20,7 +20,17 @@ const Form = ({ timerName, setTimerName }) => {
         s: 0,
         id: new Date().getTime(),
       },
-    ]);
+    ]);*/
+    dispatch({
+      type: "ADD_TIMER",
+      payload: {
+        name: timerName,
+        h: 0,
+        m: 0,
+        s: 0,
+        id: new Date().getTime(),
+      },
+    });
     setTimerName("");
   };
 
