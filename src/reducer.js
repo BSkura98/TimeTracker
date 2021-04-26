@@ -4,7 +4,6 @@ export const reducer = (state, action) => {
     const timers = [...state.timers, action.payload];
     localStorage.setItem("timers", JSON.stringify(timers));
     return { ...state, timers };
-    //return [...state.timers, action.payload];
   }
   if (action.type === "LOAD_TIMERS") {
     console.log("LOAD_TIMERS");
@@ -30,7 +29,6 @@ export const reducer = (state, action) => {
       ...state,
       timers: timers,
     };
-    //return state.timers.splice(action.payload, 1);
   }
   if (action.type === "SET_CURRENT_TIMER") {
     console.log("SET_CURRENT_TIMER");

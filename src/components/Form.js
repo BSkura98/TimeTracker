@@ -11,16 +11,6 @@ const Form = ({ timerName, setTimerName }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    /*setTimers([
-      ...timers,
-      {
-        name: timerName,
-        h: 0,
-        m: 0,
-        s: 0,
-        id: new Date().getTime(),
-      },
-    ]);*/
     dispatch({
       type: "ADD_TIMER",
       payload: {

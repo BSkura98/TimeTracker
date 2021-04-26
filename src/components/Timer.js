@@ -7,7 +7,6 @@ const Timer = ({ timer }) => {
 
   const deleteHandler = () => {
     dispatch({ type: "REMOVE_TIMER", payload: timer });
-    //setTimers(timers.filter((t) => t.id !== timer.id));
     startStopTimer(timer, true);
   };
 
