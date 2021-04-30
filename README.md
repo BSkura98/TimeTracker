@@ -2,8 +2,6 @@
 
 This application allows you to track the time you spend on various activities.
 
-#### Warning! This application doesn't work properly!
-
 ## Screenshot
 
 ![Screenshot](./img/screenshot.PNG)
@@ -23,7 +21,6 @@ This application allows you to track the time you spend on various activities.
 
 To-do list:
 
-- Fix starting timer (there is a wrong value after starting the timer)
 - Add bootstrap
 - Renaming timers
 

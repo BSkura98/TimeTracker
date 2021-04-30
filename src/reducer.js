@@ -32,14 +32,14 @@ export const reducer = (state, action) => {
   }
   if (action.type === "SET_CURRENT_TIMER") {
     console.log("SET_CURRENT_TIMER");
-    console.log(
-      "SET_CURRENT_TIMER old currentTimer id " + state.currentTimer.id
-    );
     const timer = action.payload;
-    const newState = { ...state, currentTimer: timer };
-    console.log(
-      "SET_CURRENT_TIMER new currentTimer id " + newState.currentTimer.id
-    );
+    const newState = {
+      ...state,
+      currentTimer: timer,
+      updatedSecond: timer.s,
+      updatedMinute: timer.m,
+      updatedHour: timer.h,
+    };
     return newState;
   }
   if (action.type === "INCREMENT_TIMER") {

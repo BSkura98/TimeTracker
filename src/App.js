@@ -19,6 +19,12 @@ function App() {
   const [timerName, setTimerName] = useState("");
   const [interv, setInterv] = useState();
   const [state, dispatch] = useReducer(reducer, defaultState);
+  //const [updatedTime, setUpdatedTime] = useState({
+  //  updatedSecond: 0,
+  //  updatedMinute: 0,
+  //  updatedHour: 0,
+  //  timerId: 0
+  //})
 
   useEffect(() => {
     dispatch({ type: "LOAD_TIMERS" });
@@ -37,33 +43,9 @@ function App() {
   };
 
   const run = () => {
-    /*console.log("run function");
-    console.log(state.currentTimer.id);
-    if (updatedMinute === 60) {
-      updatedHour++;
-      updatedMinute = 0;
-    }
-    if (updatedSecond === 60) {
-      updatedMinute++;
-      updatedSecond = 0;
-    }
-    updatedSecond++;
-
-    var newTimers = state.timers.map((item) => {
-      if (item.id === state.currentTimer.id) {
-        const updatedItem = {
-          ...item,
-          s: updatedSecond,
-          m: updatedMinute,
-          h: updatedHour,
-        };
-        return updatedItem;
-      }
-      return item;
+    dispatch({
+      type: "INCREMENT_TIMER",
     });
-    dispatch({ type: "SAVE_TIMERS", payload: newTimers });*/
-    dispatch({ type: "INCREMENT_TIMER" });
-    console.log("x");
   };
 
   const startStopTimer = (timer, timerRemoved) => {
@@ -116,12 +98,7 @@ function App() {
         <header>
           <h1>Time Tracker</h1>
         </header>
-        <Form
-          //timers={timers}
-          //setTimers={setTimers}
-          timerName={timerName}
-          setTimerName={setTimerName}
-        />
+        <Form timerName={timerName} setTimerName={setTimerName} />
         <TimerList />
       </div>
     </TimerContext.Provider>
