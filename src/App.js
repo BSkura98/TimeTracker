@@ -19,28 +19,10 @@ function App() {
   const [timerName, setTimerName] = useState("");
   const [interv, setInterv] = useState();
   const [state, dispatch] = useReducer(reducer, defaultState);
-  //const [updatedTime, setUpdatedTime] = useState({
-  //  updatedSecond: 0,
-  //  updatedMinute: 0,
-  //  updatedHour: 0,
-  //  timerId: 0
-  //})
 
   useEffect(() => {
     dispatch({ type: "LOAD_TIMERS" });
   }, []);
-
-  var updatedSecond = 0,
-    updatedMinute = 0,
-    updatedHour = 0;
-  var timerId = 0;
-
-  const setTime = (timer) => {
-    updatedSecond = timer.s;
-    updatedMinute = timer.m;
-    updatedHour = timer.h;
-    timerId = timer.id;
-  };
 
   const run = () => {
     dispatch({
@@ -66,7 +48,7 @@ function App() {
       dispatch({ type: "SET_CURRENT_TIMER", payload: { id: 0 } });
     } else if (timer.id === 0) {
       console.log("Start timer");
-      startTimer(timer);
+      startTimer();
 
       dispatch({ type: "SET_CURRENT_TIMER", payload: timer });
     } else {
@@ -74,12 +56,11 @@ function App() {
       console.log("current timer " + JSON.stringify(state.currentTimer));
 
       stopTimer();
-      startTimer(timer);
+      startTimer();
     }
   };
-  const startTimer = (timer) => {
+  const startTimer = () => {
     console.log("startTimer function");
-    setTime(timer);
 
     setInterv(
       setInterval(() => {
