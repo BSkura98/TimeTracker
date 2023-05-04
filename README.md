@@ -8,22 +8,15 @@ This application allows you to track the time you spend on various activities.
 
 ## Technologies
 
-- React.js
-- JSX
-- JavaScript
+This project was created using React.js with JavaScript.
 
-## Features
+## Current features
 
 - Start/stop timers
 - Create new timers
 - Delete timers
 - Save timers in local storage
 
-To-do list:
-
-- Add bootstrap
-- Renaming timers
-
 ## Status
 
-Project is _in progress_
+Project is _finished_
