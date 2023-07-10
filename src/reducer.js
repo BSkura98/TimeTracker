@@ -1,26 +1,18 @@
 export const reducer = (state, action) => {
   if (action.type === "ADD_TIMER") {
-    console.log("ADD_TIMER");
     const timers = [...state.timers, action.payload];
     localStorage.setItem("timers", JSON.stringify(timers));
     return { ...state, timers };
   }
   if (action.type === "LOAD_TIMERS") {
-    console.log("LOAD_TIMERS");
     const newTimers = localStorage.getItem("timers");
-    console.log(
-      "timers: " + { ...state, timers: JSON.parse(newTimers) }.timers
-    );
-    return { ...state, timers: JSON.parse(newTimers) };
+    return { ...state, timers: JSON.parse(newTimers) ?? [] };
   }
   if (action.type === "SAVE_TIMERS") {
-    console.log("SAVE_TIMERS");
-    console.log("SAVE_TIMERS old currentTimer id " + state.currentTimer.id);
     localStorage.setItem("timers", JSON.stringify(state.timers));
     return state;
   }
   if (action.type === "REMOVE_TIMER") {
-    console.log("REMOVE_TIMER");
     const timers = state.timers.filter(
       (timer) => timer.id !== action.payload.id
     );
@@ -31,7 +23,6 @@ export const reducer = (state, action) => {
     };
   }
   if (action.type === "SET_CURRENT_TIMER") {
-    console.log("SET_CURRENT_TIMER");
     const timer = action.payload;
     const newState = {
       ...state,

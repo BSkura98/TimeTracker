@@ -9,7 +9,7 @@ const TimerList = () => {
   return (
     <div className="timer-container">
       <ul className="timer-list">
-        {state.timers.map((timer) => (
+        {state.timers?.map((timer) => (
           <Timer key={timer.id} timer={timer} />
         ))}
       </ul>

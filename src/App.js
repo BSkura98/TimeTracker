@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
-import "./App.css";
 
+import "./App.scss";
 import Form from "./components/Form";
 import TimerList from "./components/TimerList";
 import { reducer } from "./reducer";
