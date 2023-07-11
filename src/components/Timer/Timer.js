@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
+import Button from "react-bootstrap/Button";
+import "./style.scss";
 
-import { TimerContext } from "../App";
+import { TimerContext } from "../../App";
 
 const Timer = ({ timer }) => {
   const { startStopTimer, dispatch } = useContext(TimerContext);
@@ -21,17 +23,18 @@ const Timer = ({ timer }) => {
     <div className="timer">
       <li className="timer-item">{timer.name}</li>
       <li>{displayTime()}</li>
-      <button
+      <Button
         onClick={() => {
           startStopTimer(timer);
         }}
-        className="start-btn"
+        variant="success"
+        className="item-button rounded-circle"
       >
         <i className="fas fa-stopwatch"></i>
-      </button>
-      <button onClick={deleteHandler} className="trash-btn">
+      </Button>
+      <Button onClick={deleteHandler} variant="danger" className="item-button rounded-circle">
         <i className="fas fa-trash"></i>
-      </button>
+      </Button>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { TimerContext } from "../App";
+import { TimerContext } from "../../App";
 
 const Form = ({ timerName, setTimerName }) => {
   const { dispatch } = useContext(TimerContext);

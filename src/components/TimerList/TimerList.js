@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
-import Timer from "./Timer";
-import { TimerContext } from "../App";
+import Timer from "../Timer/Timer";
+import { TimerContext } from "../../App";
 
 const TimerList = () => {
   const { state } = useContext(TimerContext);
