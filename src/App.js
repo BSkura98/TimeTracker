@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useReducer } from "react";
 
 import "./App.scss";
-import Form from "./components/Form";
-import TimerList from "./components/TimerList";
+import Form from "./components/Form/Form";
+import TimerList from "./components/TimerList/TimerList";
 import { reducer } from "./reducer";
+import { ClockIcon } from "./icons/icons";
 
 export const TimerContext = React.createContext();
 
@@ -77,7 +78,10 @@ function App() {
     <TimerContext.Provider value={{ startStopTimer, state, dispatch }}>
       <div className="App">
         <header>
-          <h1>Time Tracker</h1>
+          <div className="logo fs-2 mb-3">
+            <ClockIcon />
+            <h1 className="title">Time Tracker</h1>
+          </div>
         </header>
         <Form timerName={timerName} setTimerName={setTimerName} />
         <TimerList />
