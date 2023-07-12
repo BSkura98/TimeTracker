@@ -1,4 +1,7 @@
 import React, { useContext } from "react";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 import Timer from "../Timer/Timer";
 import { TimerContext } from "../../App";
@@ -7,13 +10,15 @@ const TimerList = () => {
   const { state } = useContext(TimerContext);
 
   return (
-    <div className="timer-container">
-      <ul className="timer-list">
+    <Container className="timer-container">
+      <Col>
         {state.timers?.map((timer) => (
-          <Timer key={timer.id} timer={timer} />
+          <Row>
+            <Timer key={timer.id} timer={timer} />
+          </Row>
         ))}
-      </ul>
-    </div>
+      </Col>
+    </Container>
   );
 };
 

@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
-import "./style.scss";
+import Card from "react-bootstrap/Card";
+import { Container, Row, Col, ButtonGroup } from "react-bootstrap";
 
+import "./style.scss";
 import { TimerContext } from "../../App";
 
 const Timer = ({ timer }) => {
@@ -12,7 +14,7 @@ const Timer = ({ timer }) => {
     startStopTimer(timer, true);
   };
 
-  const displayTime = () => {
+  const getTimerTime = () => {
     let h = timer.h >= 10 ? timer.h : "0" + timer.h;
     let m = timer.m >= 10 ? timer.m : "0" + timer.m;
     let s = timer.s >= 10 ? timer.s : "0" + timer.s;
@@ -20,22 +22,31 @@ const Timer = ({ timer }) => {
   };
 
   return (
-    <div className="timer">
-      <li className="timer-item">{timer.name}</li>
-      <li>{displayTime()}</li>
-      <Button
-        onClick={() => {
-          startStopTimer(timer);
-        }}
-        variant="success"
-        className="item-button rounded-circle"
-      >
-        <i className="fas fa-stopwatch"></i>
-      </Button>
-      <Button onClick={deleteHandler} variant="danger" className="item-button rounded-circle">
-        <i className="fas fa-trash"></i>
-      </Button>
-    </div>
+    <Card className="timer mb-1">
+      <Card.Body className="p-2" style={{ width: "100%" }}>
+        <Container>
+          <Row>
+            <Col xs={6}>{timer.name}</Col>
+            <Col xs={4}>{getTimerTime()}</Col>
+            <Col xs={2}>
+              <ButtonGroup>
+                <Button
+                  onClick={() => {
+                    startStopTimer(timer);
+                  }}
+                  variant="outline-success"
+                >
+                  <i className="fas fa-stopwatch"></i>
+                </Button>
+                <Button onClick={deleteHandler} variant="outline-danger">
+                  <i className="fas fa-trash"></i>
+                </Button>
+              </ButtonGroup>
+            </Col>
+          </Row>
+        </Container>
+      </Card.Body>
+    </Card>
   );
 };
 
