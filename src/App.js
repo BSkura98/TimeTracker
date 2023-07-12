@@ -4,8 +4,6 @@ import "./App.scss";
 import Form from "./components/Form/Form";
 import TimerList from "./components/TimerList/TimerList";
 import { reducer } from "./reducer";
-// import ClockIcon from "./icons/clock.svg";
-// import { ReactComponent as ClockIcon } from "./icons/clock.svg";
 import { ClockIcon } from "./icons/icons";
 
 export const TimerContext = React.createContext();
