@@ -7,8 +7,11 @@ This application allows you to track the time you spend on various activities.
 ![Screenshot](./img/screenshot.PNG)
 
 ## Technologies
-
-This project was created using React.js with JavaScript.
+* React
+* JavaScript
+* Redux
+* Bootstrap
+* SASS
 
 ## Current features
 
@@ -17,6 +20,13 @@ This project was created using React.js with JavaScript.
 - Delete timers
 - Save timers in local storage
 
+To do list:
+* Improve overall look of the page
+* Create API to save all the data
+* Save more detailed data regarding timers
+
 ## Status
 
-Project is _finished_
+Project is _in progress_
+
+This simple project was created in April 2021 and I returned to its development in July 2023
