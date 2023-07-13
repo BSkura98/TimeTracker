@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
+import BootstrapForm from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Stack from "react-bootstrap/Stack";
 
 import { TimerContext } from "../../App";
+import "./style.scss";
+import { PlusIcon } from "../../icons/icons";
 
 const Form = ({ timerName, setTimerName }) => {
   const { dispatch } = useContext(TimerContext);
@@ -26,15 +31,18 @@ const Form = ({ timerName, setTimerName }) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <input
-        value={timerName}
-        onChange={inputTextHandler}
-        type="text"
-        className="timer-input"
-      />
-      <button className="add-timer-button" type="submit">
-        <i className="fas fa-plus-circle"></i>
-      </button>
+      <Stack className="add-timer-form-stack" direction="horizontal" gap={3}>
+        <BootstrapForm.Control
+          value={timerName}
+          onChange={inputTextHandler}
+          type="text"
+          className="timer-input me-auto"
+          placeholder="Add timer"
+        />
+        <Button className="add-timer-button" type="submit" variant="light">
+          <PlusIcon />
+        </Button>
+      </Stack>
     </form>
   );
 };
