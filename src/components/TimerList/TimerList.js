@@ -5,12 +5,13 @@ import Row from "react-bootstrap/Row";
 
 import Timer from "../Timer/Timer";
 import { TimerContext } from "../../App";
+import "./style.scss";
 
 const TimerList = () => {
   const { state } = useContext(TimerContext);
 
   return (
-    <Container className="timer-container">
+    <Container className="timer-list">
       <Col>
         {state.timers?.map((timer) => (
           <Row>

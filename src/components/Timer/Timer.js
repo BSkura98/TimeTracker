@@ -27,18 +27,20 @@ const Timer = ({ timer }) => {
         <Container>
           <Row>
             <Col xs={6}>{timer.name}</Col>
-            <Col xs={4}>{getTimerTime()}</Col>
+            <Col xs={4} className="timer-time">
+              {getTimerTime()}
+            </Col>
             <Col xs={2}>
               <ButtonGroup>
                 <Button
                   onClick={() => {
                     startStopTimer(timer);
                   }}
-                  variant="outline-success"
+                  variant="outline"
                 >
                   <i className="fas fa-stopwatch"></i>
                 </Button>
-                <Button onClick={deleteHandler} variant="outline-danger">
+                <Button onClick={deleteHandler} variant="outline">
                   <i className="fas fa-trash"></i>
                 </Button>
               </ButtonGroup>
