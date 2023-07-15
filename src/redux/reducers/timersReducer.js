@@ -1,4 +1,4 @@
-export const reducer = (state, action) => {
+export const timersReducer = (state, action) => {
   if (action.type === "ADD_TIMER") {
     const timers = [...state.timers, action.payload];
     localStorage.setItem("timers", JSON.stringify(timers));
@@ -71,6 +71,4 @@ export const reducer = (state, action) => {
       updatedHour: h,
     };
   }
-
-  throw new Error("no matching action type");
 };

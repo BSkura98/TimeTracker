@@ -24,4 +24,15 @@
   .timer-time {
     color: $textGreen;
   }
+
+  .row {
+    align-items: center;
+  }
+
+  // input {
+  //   &:focus {
+  //     background-color: aqua;
+  //     background: aqua;
+  //   }
+  // }
 }

@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Container, Row, Col, ButtonGroup } from "react-bootstrap";
+import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
 import "./style.scss";
 import { TimerContext } from "../../App";
+import { removeTimer } from "../../redux/actions/timer";
 
 const Timer = ({ timer }) => {
   const { startStopTimer, dispatch } = useContext(TimerContext);
 
   const deleteHandler = () => {
-    dispatch({ type: "REMOVE_TIMER", payload: timer });
+    dispatch(removeTimer(timer));
     startStopTimer(timer, true);
   };
 
@@ -26,7 +27,9 @@ const Timer = ({ timer }) => {
       <Card.Body className="p-2" style={{ width: "100%" }}>
         <Container>
           <Row>
-            <Col xs={6}>{timer.name}</Col>
+            <Col xs={6}>
+              <Form.Control defaultValue={timer.name} plaintext />
+            </Col>
             <Col xs={4} className="timer-time">
               {getTimerTime()}
             </Col>

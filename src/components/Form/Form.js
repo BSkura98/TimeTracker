@@ -5,7 +5,8 @@ import Stack from "react-bootstrap/Stack";
 
 import { TimerContext } from "../../App";
 import "./style.scss";
-import { PlusIcon } from "../../icons/icons";
+import { PlusIcon } from "../../icons";
+import { addTimer } from "../../redux/actions/timer";
 
 const Form = ({ timerName, setTimerName }) => {
   const { dispatch } = useContext(TimerContext);
@@ -16,16 +17,7 @@ const Form = ({ timerName, setTimerName }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch({
-      type: "ADD_TIMER",
-      payload: {
-        name: timerName,
-        h: 0,
-        m: 0,
-        s: 0,
-        id: new Date().getTime(),
-      },
-    });
+    dispatch(addTimer(timerName));
     setTimerName("");
   };
 
