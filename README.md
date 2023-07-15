@@ -21,12 +21,13 @@ This application allows you to track the time you spend on various activities.
 - Save timers in local storage
 
 To do list:
+* Edit timers
 * Improve overall look of the page
 * Create API to save all the data
-* Save more detailed data regarding timers
+* Save and display more detailed data regarding timers
 
 ## Status
 
 Project is _in progress_
 
-This simple project was created in April 2021 and I returned to its development in July 2023
+This simple project was created in April 2021 and I returned to its development in July 2023.
