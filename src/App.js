@@ -20,7 +20,6 @@ const defaultState = {
 };
 
 function App() {
-  const [timerName, setTimerName] = useState("");
   const [interv, setInterv] = useState();
   const [state, dispatch] = useReducer(timersReducer, defaultState);
 
@@ -72,7 +71,7 @@ function App() {
 
   return (
     <TimerContext.Provider value={{ startStopTimer, state, dispatch }}>
-      {/* <ReduxProvider store={store}> */}
+      <ReduxProvider store={store}>
         <div className="App">
           <header>
             <div className="logo fs-2 mb-3">
@@ -80,10 +79,10 @@ function App() {
               <h1 className="title">Time Tracker</h1>
             </div>
           </header>
-          <Form timerName={timerName} setTimerName={setTimerName} />
+          <Form />
           <TimerList />
         </div>
-      {/* </ReduxProvider> */}
+      </ReduxProvider>
     </TimerContext.Provider>
   );
 }

@@ -1,19 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 import Timer from "../Timer/Timer";
-import { TimerContext } from "../../App";
 import "./style.scss";
 
 const TimerList = () => {
-  const { state } = useContext(TimerContext);
+  const timers = useSelector((state) => state.timers);
 
   return (
     <Container className="timer-list">
       <Col>
-        {state.timers?.map((timer) => (
+        {timers.timers?.map((timer) => (
           <Row>
             <Timer key={timer.id} timer={timer} />
           </Row>

@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import BootstrapForm from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 
-import { TimerContext } from "../../App";
 import "./style.scss";
 import { PlusIcon } from "../../icons";
-import { addTimer } from "../../redux/actions/timer";
+import { addTimer } from "../../redux/slices/timers";
 
-const Form = ({ timerName, setTimerName }) => {
-  const { dispatch } = useContext(TimerContext);
+const Form = () => {
+  const dispatch = useDispatch();
+  const [timerName, setTimerName] = useState("");
 
   const inputTextHandler = (e) => {
     setTimerName(e.target.value);

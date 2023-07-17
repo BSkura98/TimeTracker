@@ -2,22 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const timersSlice = createSlice({
   name: "timers",
-  initialState: [],
+  initialState: {
+    timers: [],
+    currentTimer: {},
+    updatedSecond: 0,
+    updatedMinute: 0,
+    updatedHour: 0,
+  },
   reducers: {
-    todoAdded(state, action) {
-      state.push({
-        id: action.payload.id,
-        text: action.payload.text,
-        completed: false,
-      });
-    },
-    todoToggled(state, action) {
-      const todo = state.find((todo) => todo.id === action.payload);
-      todo.completed = !todo.completed;
-    },
     addTimer(state, action) {
       state.timers.push({
-        name: action.payload.name,
+        name: action.payload,
         h: 0,
         m: 0,
         s: 0,
@@ -89,5 +84,11 @@ const timersSlice = createSlice({
   },
 });
 
-export const { todoAdded, todoToggled } = timersSlice.actions;
+export const {
+  addTimer,
+  getTimers,
+  setCurrentTimer,
+  incrementTimer,
+  removeTimer,
+} = timersSlice.actions;
 export default timersSlice.reducer;
