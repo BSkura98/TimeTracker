@@ -4,10 +4,11 @@ const timersSlice = createSlice({
   name: "timers",
   initialState: {
     timers: [],
-    currentTimer: {},
+    currentTimer: null,
     updatedSecond: 0,
     updatedMinute: 0,
     updatedHour: 0,
+    timerRunning: false,
   },
   reducers: {
     addTimer(state, action) {
@@ -26,9 +27,11 @@ const timersSlice = createSlice({
     },
     setCurrentTimer(state, action) {
       state.currentTimer = action.payload;
-      state.updatedSecond = action.payload.s;
-      state.updatedMinute = action.payload.m;
-      state.updatedHour = action.payload.h;
+      if (action.payload) {
+        state.updatedSecond = action.payload.s;
+        state.updatedMinute = action.payload.m;
+        state.updatedHour = action.payload.h;
+      }
     },
     incrementTimer(state) {
       let hours = state.updatedHour;
@@ -75,6 +78,9 @@ const timersSlice = createSlice({
         timers,
       };
     },
+    setTimerRunning(state, action) {
+      state.timerRunning = action.payload;
+    },
   },
 });
 
@@ -84,5 +90,6 @@ export const {
   setCurrentTimer,
   incrementTimer,
   removeTimer,
+  setTimerRunning,
 } = timersSlice.actions;
 export default timersSlice.reducer;

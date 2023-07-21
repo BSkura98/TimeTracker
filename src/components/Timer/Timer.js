@@ -1,18 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
 import "./style.scss";
-import {
-  removeTimer,
-  setCurrentTimer,
-  incrementTimer,
-} from "../../redux/slices/timers";
+import { removeTimer, setCurrentTimer } from "../../redux/slices/timers";
 
 const Timer = ({ timer }) => {
-  const [interv, setInterv] = useState(null);
   const dispatch = useDispatch();
   const state = useSelector((state) => state.timers);
 
@@ -28,46 +23,20 @@ const Timer = ({ timer }) => {
     return h + ":" + m + ":" + s;
   };
 
-  const incrementTimerDispatch = () => {
-    dispatch(incrementTimer());
-  };
-
+  // TODO maybe this code can be simplified
   const startStopTimer = (timer, timerRemoved) => {
     if (timerRemoved === true) {
-      if (timer.id === state.currentTimer.id) {
-        stopTimer();
-
-        dispatch(setCurrentTimer({ id: 0 }));
+      if (timer.id === state.currentTimer?.id) {
+        dispatch(setCurrentTimer(null));
       }
       return;
     }
 
-    if (timer.id === state.currentTimer.id) {
-      stopTimer();
-
-      dispatch(setCurrentTimer({ id: 0 }));
-    } else if (timer.id === 0) {
-      startTimer();
-
-      dispatch(setCurrentTimer(timer));
+    if (timer.id === state.currentTimer?.id) {
+      dispatch(setCurrentTimer(null));
     } else {
       dispatch(setCurrentTimer(timer));
-
-      stopTimer();
-      startTimer();
     }
-  };
-
-  const startTimer = () => {
-    setInterv(
-      setInterval(() => {
-        incrementTimerDispatch();
-      }, 1000)
-    );
-  };
-
-  const stopTimer = () => {
-    clearInterval(interv);
   };
 
   return (

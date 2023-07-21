@@ -7,19 +7,31 @@ import Row from "react-bootstrap/Row";
 import Timer from "../Timer/Timer";
 import "./style.scss";
 import { getTimers } from "../../redux/slices/timers";
+import { incrementTimer } from "../../redux/slices/timers";
 
 const TimerList = () => {
-  const timers = useSelector((state) => state.timers);
+  const state = useSelector((state) => state.timers);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTimers());
   }, [dispatch]);
 
+  useEffect(() => {
+    let interv;
+    if (state.currentTimer?.id) {
+      interv = setInterval(() => {
+        dispatch(incrementTimer());
+      }, 1000);
+    }
+
+    return () => clearInterval(interv);
+  }, [dispatch, state.currentTimer?.id]);
+
   return (
     <Container className="timer-list">
       <Col>
-        {timers.timers?.map((timer) => (
+        {state.timers?.map((timer) => (
           <Row>
             <Timer key={timer.id} timer={timer} />
           </Row>
