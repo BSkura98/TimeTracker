@@ -5,7 +5,11 @@ import Card from "react-bootstrap/Card";
 import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
 import "./style.scss";
-import { removeTimer, setCurrentTimer } from "../../redux/slices/timers";
+import {
+  removeTimer,
+  setCurrentTimer,
+  editTimerName,
+} from "../../redux/slices/timers";
 
 const Timer = ({ timer }) => {
   const dispatch = useDispatch();
@@ -45,7 +49,15 @@ const Timer = ({ timer }) => {
         <Container>
           <Row>
             <Col xs={6}>
-              <Form.Control defaultValue={timer.name} plaintext />
+              <Form.Control
+                value={timer.name}
+                plaintext
+                onChange={(e) =>
+                  dispatch(
+                    editTimerName({ id: timer.id, name: e.target.value })
+                  )
+                }
+              />
             </Col>
             <Col xs={4} className="timer-time">
               {getTimerTime()}

@@ -20,6 +20,14 @@ const timersSlice = createSlice({
       });
       localStorage.setItem("timers", JSON.stringify(state.timers));
     },
+    editTimerName(state, action) {
+      state.timers = state.timers.map((timer) =>
+        timer.id === action.payload.id
+          ? { ...timer, name: action.payload.name }
+          : timer
+      );
+      localStorage.setItem("timers", JSON.stringify(state.timers));
+    },
     getTimers(state) {
       const timersFromLocalStorage = localStorage.getItem("timers");
       return { ...state, timers: JSON.parse(timersFromLocalStorage) ?? [] };
@@ -78,6 +86,7 @@ const timersSlice = createSlice({
 
 export const {
   addTimer,
+  editTimerName,
   getTimers,
   setCurrentTimer,
   incrementTimer,
