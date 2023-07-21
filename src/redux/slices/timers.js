@@ -8,7 +8,6 @@ const timersSlice = createSlice({
     updatedSecond: 0,
     updatedMinute: 0,
     updatedHour: 0,
-    timerRunning: false,
   },
   reducers: {
     addTimer(state, action) {
@@ -36,17 +35,16 @@ const timersSlice = createSlice({
     incrementTimer(state) {
       let hours = state.updatedHour;
       let minutes = state.updatedMinute;
-      let seconds = state.updatedSecond;
+      let seconds = state.updatedSecond + 1;
 
-      if (minutes === 60) {
-        hours++;
-        minutes = 0;
-      }
-      if (seconds === 60) {
+      if (seconds > 59) {
         minutes++;
         seconds = 0;
       }
-      seconds++;
+      if (minutes > 59) {
+        hours++;
+        minutes = 0;
+      }
 
       const newTimers = state.timers.map((item) => {
         if (item.id === state.currentTimer.id) {
@@ -78,9 +76,6 @@ const timersSlice = createSlice({
         timers,
       };
     },
-    setTimerRunning(state, action) {
-      state.timerRunning = action.payload;
-    },
   },
 });
 
@@ -90,6 +85,5 @@ export const {
   setCurrentTimer,
   incrementTimer,
   removeTimer,
-  setTimerRunning,
 } = timersSlice.actions;
 export default timersSlice.reducer;
