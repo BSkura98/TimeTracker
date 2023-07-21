@@ -71,10 +71,7 @@ const timersSlice = createSlice({
         (timer) => timer.id !== action.payload.id
       );
       localStorage.setItem("timers", JSON.stringify(timers));
-      state = {
-        ...state,
-        timers,
-      };
+      state.timers = timers;
     },
   },
 });
