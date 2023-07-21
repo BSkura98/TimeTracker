@@ -17,7 +17,7 @@ const Timer = ({ timer }) => {
 
   const deleteHandler = () => {
     dispatch(removeTimer(timer));
-    startStopTimer(timer, true);
+    startStopTimer(timer);
   };
 
   const getTimerTime = () => {
@@ -27,20 +27,11 @@ const Timer = ({ timer }) => {
     return h + ":" + m + ":" + s;
   };
 
-  // TODO maybe this code can be simplified
-  const startStopTimer = (timer, timerRemoved) => {
-    if (timerRemoved === true) {
-      if (timer.id === state.currentTimer?.id) {
-        dispatch(setCurrentTimer(null));
-      }
-      return;
-    }
-
+  const startStopTimer = (timer) => {
     if (timer.id === state.currentTimer?.id) {
-      dispatch(setCurrentTimer(null));
-    } else {
-      dispatch(setCurrentTimer(timer));
+      return dispatch(setCurrentTimer(null));
     }
+    dispatch(setCurrentTimer(timer));
   };
 
   return (
