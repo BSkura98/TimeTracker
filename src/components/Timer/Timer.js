@@ -1,17 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Container, Row, Col, ButtonGroup } from "react-bootstrap";
+import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
 import "./style.scss";
-import { TimerContext } from "../../App";
+import {
+  removeTimer,
+  setCurrentTimer,
+  editTimerName,
+} from "../../redux/slices/timers";
 
 const Timer = ({ timer }) => {
-  const { startStopTimer, dispatch } = useContext(TimerContext);
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.timers);
 
   const deleteHandler = () => {
-    dispatch({ type: "REMOVE_TIMER", payload: timer });
-    startStopTimer(timer, true);
+    dispatch(removeTimer(timer));
+    startStopTimer(timer);
   };
 
   const getTimerTime = () => {
@@ -21,12 +27,29 @@ const Timer = ({ timer }) => {
     return h + ":" + m + ":" + s;
   };
 
+  const startStopTimer = (timer) => {
+    if (timer.id === state.currentTimer?.id) {
+      return dispatch(setCurrentTimer(null));
+    }
+    dispatch(setCurrentTimer(timer));
+  };
+
   return (
     <Card className="timer mb-1">
       <Card.Body className="p-2" style={{ width: "100%" }}>
         <Container>
           <Row>
-            <Col xs={6}>{timer.name}</Col>
+            <Col xs={6}>
+              <Form.Control
+                value={timer.name}
+                plaintext
+                onChange={(e) =>
+                  dispatch(
+                    editTimerName({ id: timer.id, name: e.target.value })
+                  )
+                }
+              />
+            </Col>
             <Col xs={4} className="timer-time">
               {getTimerTime()}
             </Col>
