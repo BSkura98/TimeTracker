@@ -1,14 +1,20 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
 import "./style.scss";
-import { TimerContext } from "../../App";
-import { removeTimer } from "../../redux/actions/timer";
+import {
+  removeTimer,
+  setCurrentTimer,
+  incrementTimer,
+} from "../../redux/slices/timers";
 
 const Timer = ({ timer }) => {
-  const { startStopTimer, dispatch } = useContext(TimerContext);
+  const [interv, setInterv] = useState(null);
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.timers);
 
   const deleteHandler = () => {
     dispatch(removeTimer(timer));
@@ -20,6 +26,48 @@ const Timer = ({ timer }) => {
     let m = timer.m >= 10 ? timer.m : "0" + timer.m;
     let s = timer.s >= 10 ? timer.s : "0" + timer.s;
     return h + ":" + m + ":" + s;
+  };
+
+  const incrementTimerDispatch = () => {
+    dispatch(incrementTimer());
+  };
+
+  const startStopTimer = (timer, timerRemoved) => {
+    if (timerRemoved === true) {
+      if (timer.id === state.currentTimer.id) {
+        stopTimer();
+
+        dispatch(setCurrentTimer({ id: 0 }));
+      }
+      return;
+    }
+
+    if (timer.id === state.currentTimer.id) {
+      stopTimer();
+
+      dispatch(setCurrentTimer({ id: 0 }));
+    } else if (timer.id === 0) {
+      startTimer();
+
+      dispatch(setCurrentTimer(timer));
+    } else {
+      dispatch(setCurrentTimer(timer));
+
+      stopTimer();
+      startTimer();
+    }
+  };
+
+  const startTimer = () => {
+    setInterv(
+      setInterval(() => {
+        incrementTimerDispatch();
+      }, 1000)
+    );
+  };
+
+  const stopTimer = () => {
+    clearInterval(interv);
   };
 
   return (

@@ -25,36 +25,33 @@ const timersSlice = createSlice({
       return { ...state, timers: JSON.parse(timersFromLocalStorage) ?? [] };
     },
     setCurrentTimer(state, action) {
-      state = {
-        ...state,
-        currentTimer: action.timer,
-        updatedSecond: action.timer.s,
-        updatedMinute: action.timer.m,
-        updatedHour: action.timer.h,
-      };
+      state.currentTimer = action.payload;
+      state.updatedSecond = action.payload.s;
+      state.updatedMinute = action.payload.m;
+      state.updatedHour = action.payload.h;
     },
     incrementTimer(state) {
-      let h = state.updatedHour;
-      let m = state.updatedMinute;
-      let s = state.updatedSecond;
+      let hours = state.updatedHour;
+      let minutes = state.updatedMinute;
+      let seconds = state.updatedSecond;
 
-      if (m === 60) {
-        h++;
-        m = 0;
+      if (minutes === 60) {
+        hours++;
+        minutes = 0;
       }
-      if (s === 60) {
-        m++;
-        s = 0;
+      if (seconds === 60) {
+        minutes++;
+        seconds = 0;
       }
-      s++;
+      seconds++;
 
       const newTimers = state.timers.map((item) => {
         if (item.id === state.currentTimer.id) {
           const updatedItem = {
             ...item,
-            s: s,
-            m: m,
-            h: h,
+            s: seconds,
+            m: minutes,
+            h: hours,
           };
           return updatedItem;
         }
@@ -63,13 +60,10 @@ const timersSlice = createSlice({
 
       localStorage.setItem("timers", JSON.stringify(newTimers));
 
-      state = {
-        ...state,
-        timers: newTimers,
-        updatedSecond: s,
-        updatedMinute: m,
-        updatedHour: h,
-      };
+      state.timers = newTimers;
+      state.updatedSecond = seconds;
+      state.updatedMinute = minutes;
+      state.updatedHour = hours;
     },
     removeTimer(state, action) {
       const timers = state.timers.filter(
