@@ -17,12 +17,11 @@ This application allows you to track the time you spend on various activities.
 
 - Start/stop timers
 - Create new timers
--  Edit timers
+- Edit timers
 - Delete timers
 - Save timers in local storage
 
 To do list:
-* Improve overall look of the page
 * Create API to save all the data
 * Save and display more detailed data regarding timers
 
