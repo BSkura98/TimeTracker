@@ -2,8 +2,9 @@ import React from "react";
 
 import Form from "./Form/Form";
 import TimerList from "./TimerList/TimerList";
+import "./style.scss";
 
-export const Timers = () => {
+export const SimpleTimers = () => {
   return (
     <>
       <Form />

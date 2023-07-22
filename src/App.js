@@ -2,9 +2,10 @@ import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import "./App.scss";
-import { Timers } from "./pages/Timers";
+import { SimpleTimers } from "./pages/Timers";
 import { Navbar } from "./components/NavBar";
-import { DetailedTimers } from "./pages/DetailedTimers";
+import { AdvancedTimers } from "./pages/AdvancedTimers";
+import { NotFound } from "./pages/NotFound";
 
 function App() {
   return (
@@ -12,9 +13,10 @@ function App() {
       <Navbar />
       <BrowserRouter>
         <Routes>
-          <Route path="/timers" element={<Timers />} />
-          <Route path="/detailedTimer" element={<DetailedTimers />} />
+          <Route path="/timers" element={<SimpleTimers />} />
+          <Route path="/advancedTimers" element={<AdvancedTimers />} />
           <Route path="/" element={<Navigate to="/timers" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

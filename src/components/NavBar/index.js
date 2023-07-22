@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ClockIcon } from "../../icons";
+import "./style.scss";
 
 export const Navbar = () => {
   return (

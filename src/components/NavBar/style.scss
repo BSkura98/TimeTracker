@@ -1,0 +1,10 @@
+@import "../../styles/colors";
+
+header {
+  font-size: 2rem;
+  min-height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $backgroundPrimary;
+}
