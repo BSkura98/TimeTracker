@@ -1,26 +1,23 @@
 import React from "react";
-import { Provider as ReduxProvider } from "react-redux";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import "./App.scss";
-import Form from "./components/Form/Form";
-import TimerList from "./components/TimerList/TimerList";
-import { ClockIcon } from "./icons";
-import { store } from "./redux/store";
+import { Timers } from "./pages/Timers";
+import { Navbar } from "./components/NavBar";
+import { DetailedTimers } from "./pages/DetailedTimers";
 
 function App() {
   return (
-    <ReduxProvider store={store}>
-      <div className="App">
-        <header>
-          <div className="logo fs-2 mb-3">
-            <ClockIcon />
-            <h1 className="title">Time Tracker</h1>
-          </div>
-        </header>
-        <Form />
-        <TimerList />
-      </div>
-    </ReduxProvider>
+    <div className="App">
+      <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/timers" element={<Timers />} />
+          <Route path="/detailedTimer" element={<DetailedTimers />} />
+          <Route path="/" element={<Navigate to="/timers" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
