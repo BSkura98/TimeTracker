@@ -9,7 +9,7 @@ import {
   removeTimer,
   setCurrentTimer,
   editTimerName,
-} from "../../redux/slices/timers";
+} from "../../../redux/slices/timers";
 
 const Timer = ({ timer }) => {
   const dispatch = useDispatch();

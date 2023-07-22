@@ -6,8 +6,8 @@ import Row from "react-bootstrap/Row";
 
 import Timer from "../Timer/Timer";
 import "./style.scss";
-import { getTimers } from "../../redux/slices/timers";
-import { incrementTimer } from "../../redux/slices/timers";
+import { getTimers } from "../../../redux/slices/timers";
+import { incrementTimer } from "../../../redux/slices/timers";
 
 const TimerList = () => {
   const state = useSelector((state) => state.timers);

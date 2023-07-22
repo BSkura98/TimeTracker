@@ -1,6 +1,7 @@
 @import "./styles/input";
 @import "./styles/button";
 @import "./styles/colors";
+@import "./styles/typography";
 
 * {
   margin: 0;
@@ -12,56 +13,4 @@ body {
   background: $backgroundSecondary;
   color: white;
   min-height: 100vh;
-}
-
-.logo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: $textPrimary;
-  margin-top: 2rem;
-
-  svg {
-    margin-right: 1rem;
-    height: 1.6rem;
-    width: 1.6rem;
-  }
-
-  h1 {
-    margin-bottom: 0;
-    font-weight: 700;
-  }
-}
-
-header {
-  font-size: 2rem;
-}
-
-header,
-form {
-  min-height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $backgroundPrimary;
-}
-
-form input,
-form button {
-  padding: 0.5rem;
-  font-size: 2rem;
-  border: none;
-  background: white;
-}
-
-form button {
-  color: #37247a;
-  background: #f7fffe;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-form button:hover {
-  background: #37247a;
-  color: white;
 }

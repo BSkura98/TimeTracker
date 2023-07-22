@@ -5,8 +5,8 @@ import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 
 import "./style.scss";
-import { PlusIcon } from "../../icons";
-import { addTimer } from "../../redux/slices/timers";
+import { PlusIcon } from "../../../icons";
+import { addTimer } from "../../../redux/slices/timers";
 
 const Form = () => {
   const dispatch = useDispatch();
