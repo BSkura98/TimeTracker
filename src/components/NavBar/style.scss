@@ -8,6 +8,11 @@
   border-bottom: 0.1rem solid $borderColor;
 }
 
+.link-selected {
+  color: $textSelected !important;
+  font-weight: 600;
+}
+
 .logo {
   display: flex;
   flex-direction: row;
