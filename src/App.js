@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-import "./App.scss";
 import { SimpleTimers } from "./pages/Timers";
 import { Navbar } from "./components/NavBar";
 import { AdvancedTimers } from "./pages/AdvancedTimers";
 import { NotFound } from "./pages/NotFound";
+import "./App.scss";
 
 function App() {
   return (

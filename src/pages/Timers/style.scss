@@ -1,24 +1,5 @@
 @import "./../../styles/colors";
 
-.logo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: $textPrimary;
-  margin-top: 2rem;
-
-  svg {
-    margin-right: 1rem;
-    height: 1.6rem;
-    width: 1.6rem;
-  }
-
-  h1 {
-    margin-bottom: 0;
-    font-weight: 700;
-  }
-}
-
 form {
   min-height: 5rem;
   display: flex;

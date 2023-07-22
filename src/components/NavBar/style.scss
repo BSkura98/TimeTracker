@@ -1,10 +1,26 @@
 @import "../../styles/colors";
 
-header {
-  font-size: 2rem;
-  min-height: 5rem;
+.navbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $backgroundPrimary;
+  background-color: $backgroundPrimary !important;
+  border-bottom: 0.1rem solid $borderColor;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  svg {
+    margin-right: 0.6rem;
+    height: 1.2rem;
+    width: 1.2rem;
+  }
+
+  h3 {
+    margin-bottom: 0;
+    font-weight: 700;
+  }
 }
