@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import BootstrapForm from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
-import DatePicker from "react-datepicker";
+import Container from "react-bootstrap/Container";
 
 import "./style.scss";
-import { PlusIcon } from "../../../icons";
 import { addTimer } from "../../../redux/slices/timers";
-import { Container } from "react-bootstrap";
 
 const Form = () => {
   const dispatch = useDispatch();
   const [timerName, setTimerName] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
-  const inputTextHandler = (e) => {
+  const handleAddTimerInput = (e) => {
     setTimerName(e.target.value);
   };
 
@@ -26,27 +23,33 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="add-timer-form-container">
       <Container fluid="md">
-        <Stack className="add-timer-form-stack" direction="horizontal" gap={2}>
-          <BootstrapForm.Control
-            value={timerName}
-            onChange={inputTextHandler}
-            type="text"
-            className="timer-input me-auto"
-            placeholder="Add timer"
-          />
-          <Button className="add-timer-button" type="submit" variant="light">
+        <Stack className="add-timer-form-stack" direction="horizontal" gap={5}>
+          <form onSubmit={handleSubmit}>
+            <BootstrapForm.Control
+              value={timerName}
+              onChange={handleAddTimerInput}
+              type="text"
+              className="timer-input me-auto"
+              placeholder="Add timer"
+            />
+          </form>
+          {/* <Button className="add-timer-button" type="submit" variant="light">
             <PlusIcon />
-          </Button>
-          <DatePicker
-            showIcon
-            selected={date}
-            onChange={(date) => setDate(date)}
+          </Button> */}
+          <BootstrapForm.Control
+            type="date"
+            className="timers-date"
+            value={date}
+            onChange={(e) => {
+              e.preventDefault();
+              setDate(e.target.value);
+            }}
           />
         </Stack>
       </Container>
-    </form>
+    </div>
   );
 };
 

@@ -5,30 +5,3 @@
   background: $backgroundSecondary;
   border-color: $borderColor;
 }
-
-.react-datepicker-wrapper {
-  height: 2.6rem;
-}
-
-.react-datepicker__input-container {
-  border-radius: 2.2rem;
-  border: solid $borderColor;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  svg {
-    width: 0.9rem;
-    height: 0.9rem;
-    fill: $textButton;
-    margin-left: 1rem;
-  }
-
-  input {
-    border: none;
-    border-radius: 2.2rem;
-    height: 2.6rem;
-    width: 7rem;
-    margin-left: 1rem;
-  }
-}

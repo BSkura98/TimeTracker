@@ -1,6 +1,6 @@
 @import "./../../../styles/colors";
 
-form {
+.add-timer-form-container {
   min-height: 4rem;
   display: flex;
   justify-content: center;
@@ -12,8 +12,14 @@ form {
   max-width: 36rem;
   margin-left: auto;
   margin-right: auto;
+
+  form {
+    width: 100%;
+  }
 }
 
-.add-timer-button {
-  margin-right: 2rem;
+.timers-date {
+  max-width: 10rem;
+  background: $backgroundButton !important;
+  color: $textButton;
 }
