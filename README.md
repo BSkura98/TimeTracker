@@ -5,6 +5,7 @@ This application allows you to track the time you spend on various activities.
 ## Screenshot
 
 ![Screenshot](./img/screenshot.PNG)
+![Screenshot](./img/screenshot2.PNG)
 
 ## Technologies
 * React
@@ -12,6 +13,7 @@ This application allows you to track the time you spend on various activities.
 * Redux
 * Bootstrap
 * SASS
+* Chart.js
 
 ## Current features
 
@@ -22,8 +24,8 @@ This application allows you to track the time you spend on various activities.
 - Save timers in local storage
 
 To do list:
+* Save and display more detailed data regarding timers - in progress
 * Create API to save all the data
-* Save and display more detailed data regarding timers
 
 ## Status
 
