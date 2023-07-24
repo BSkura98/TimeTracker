@@ -1,5 +1,14 @@
 import React from "react";
 
+import Form from "./components/Form";
+import "./style.scss";
+
 export const AdvancedTimers = () => {
-  return <div>Advanced timers</div>;
+
+  return (
+    <>
+      <Form />
+      <div>Advanced timers</div>
+    </>
+  );
 };

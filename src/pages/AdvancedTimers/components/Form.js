@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import BootstrapForm from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 
-import "./style.scss";
 import { addTimer } from "../../../redux/slices/timers";
+import { PlayIcon } from "../../../icons";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -32,8 +33,11 @@ const Form = () => {
               onChange={handleAddTimerInput}
               type="text"
               className="timer-input me-auto"
-              placeholder="Add timer"
+              placeholder="Timer"
             />
+            <Button className="add-timer-button" type="submit" variant="light">
+              <PlayIcon />
+            </Button>
           </form>
           <BootstrapForm.Control
             type="date"

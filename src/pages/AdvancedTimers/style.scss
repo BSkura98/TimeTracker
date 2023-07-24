@@ -1,0 +1,38 @@
+@import "./../../styles/colors";
+
+.add-timer-form-container {
+  min-height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $backgroundPrimary;
+}
+
+.add-timer-form-stack {
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    button {
+      margin-left: 0.5rem;
+      border: none;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: $textSelected;
+      }
+    }
+  }
+}
+
+.timers-date {
+  max-width: 10rem;
+  background: $backgroundButton !important;
+  color: $textButton;
+}
