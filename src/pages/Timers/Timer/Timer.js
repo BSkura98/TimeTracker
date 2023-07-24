@@ -39,7 +39,7 @@ const Timer = ({ timer }) => {
       <Card.Body className="p-2" style={{ width: "100%" }}>
         <Container>
           <Row>
-            <Col xs={6}>
+            <Col xs={7}>
               <Form.Control
                 value={timer.name}
                 plaintext
@@ -50,8 +50,8 @@ const Timer = ({ timer }) => {
                 }
               />
             </Col>
-            <Col xs={4} className="timer-time">
-              {getTimerTime()}
+            <Col xs={3}>
+              <span className="timer-time">{getTimerTime()}</span>
             </Col>
             <Col xs={2}>
               <ButtonGroup>

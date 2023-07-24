@@ -7,9 +7,15 @@ h4,
 h5,
 h6,
 span,
-div {
+div,
+input {
   color: $textPrimary;
   font-family: "Trebuchet MS", serif, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+span,
+input {
+  font-size: 1rem;
 }

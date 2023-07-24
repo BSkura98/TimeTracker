@@ -1,3 +1,13 @@
+@import "./../../../styles/colors";
+
+form {
+  min-height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $backgroundPrimary;
+}
+
 .add-timer-form-stack {
   width: 28rem;
 }
