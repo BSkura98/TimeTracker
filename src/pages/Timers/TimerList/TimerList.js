@@ -29,7 +29,7 @@ const TimerList = () => {
   }, [dispatch, state.currentTimer?.id]);
 
   return (
-    <Container className="timer-list">
+    <Container className="timer-list" fluid="md">
       <Col>
         {state.timers?.map((timer) => (
           <Row>
