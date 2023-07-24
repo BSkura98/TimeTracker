@@ -9,5 +9,11 @@ form {
 }
 
 .add-timer-form-stack {
-  width: 28rem;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-timer-button {
+  margin-right: 2rem;
 }
