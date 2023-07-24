@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 
 import Form from "./components/Form";
 import "./style.scss";
-import AdvancedTimer from "./components/Timer";
+import AdvancedTimer from "./components/AdvancedTimer";
 import { getTimers } from "../../redux/slices/timers";
 
 const advancedTimers = [
