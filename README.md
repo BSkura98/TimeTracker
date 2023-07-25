@@ -5,7 +5,7 @@ This application allows you to track the time you spend on various activities.
 ## Screenshot
 
 ![Screenshot](./img/screenshot.PNG)
-![Screenshot](./img/screenshot2.PNG)
+![Screenshot](./img/screenshot2.png)
 
 ## Technologies
 * React
