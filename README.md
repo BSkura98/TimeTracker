@@ -2,7 +2,10 @@
 
 This application allows you to track the time you spend on various activities.
 
-## Screenshot
+## API
+The repository for the API can be found [here](https://github.com/BSkura98/time-tracker-api)
+
+## Screenshots
 
 ![Screenshot](./img/screenshot.PNG)
 ![Screenshot](./img/screenshot2.png)
@@ -25,7 +28,7 @@ This application allows you to track the time you spend on various activities.
 
 To do list:
 * Save and display more detailed data regarding timers - in progress
-* Create API to save all the data
+* Create API to save all the data - in progress
 
 ## Status
 
