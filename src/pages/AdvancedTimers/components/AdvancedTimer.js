@@ -6,7 +6,7 @@ import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
 import { editTimerName } from "../../../redux/slices/timers";
 
-const AdvancedTimer = ({ advancedTimer }) => {
+const AdvancedTimer = ({ timerEntry }) => {
   const dispatch = useDispatch();
 
   return (
@@ -16,12 +16,12 @@ const AdvancedTimer = ({ advancedTimer }) => {
           <Row>
             <Col xs={6}>
               <Form.Control
-                value={advancedTimer.name}
+                value={timerEntry.timer.name}
                 plaintext
                 onChange={(e) =>
                   dispatch(
                     editTimerName({
-                      id: advancedTimer.id,
+                      id: timerEntry.id,
                       name: e.target.value,
                     })
                   )
@@ -30,7 +30,8 @@ const AdvancedTimer = ({ advancedTimer }) => {
             </Col>
             <Col xs={4}>
               <span className="timer-time">
-                {advancedTimer.startTime} - {advancedTimer.endTime}
+                {new Date(timerEntry.startTime).toTimeString().split(" ")[0]} -{" "}
+                {new Date(timerEntry.endTime).toTimeString().split(" ")[0]}
               </span>
             </Col>
             <Col xs={2}>

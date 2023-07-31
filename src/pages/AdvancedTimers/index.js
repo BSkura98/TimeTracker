@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from "chart.js/auto";
@@ -6,35 +6,24 @@ import { Pie } from "react-chartjs-2";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useQuery } from "@apollo/client";
 
 import Form from "./components/Form";
 import "./style.scss";
 import AdvancedTimer from "./components/AdvancedTimer";
 import { getTimers } from "../../redux/slices/timers";
-
-const advancedTimers = [
-  {
-    id: 1,
-    name: "Reading a book",
-    startTime: "16:30:21",
-    endTime: "17:23:08",
-  },
-  {
-    id: 2,
-    name: "Watching TV",
-    startTime: "17:39:44",
-    endTime: "18:27:25",
-  },
-  {
-    id: 3,
-    name: "Cooking",
-    startTime: "19:55:49",
-    endTime: "20:28:50",
-  },
-];
+import { getTimersEntries } from "../../graphql/mutations";
 
 export const AdvancedTimers = () => {
   const dispatch = useDispatch();
+  const { error, loading, data } = useQuery(getTimersEntries);
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      setEntries(data.timerEntries);
+    }
+  }, [data]);
 
   useEffect(() => {
     dispatch(getTimers());
@@ -59,9 +48,9 @@ export const AdvancedTimers = () => {
           />
         </div>
         <Col>
-          {advancedTimers.map((timer) => (
+          {entries.map((entry) => (
             <Row>
-              <AdvancedTimer key={timer.id} advancedTimer={timer} />
+              <AdvancedTimer key={entry.id} timerEntry={entry} />
             </Row>
           ))}
         </Col>
