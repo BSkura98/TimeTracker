@@ -1,18 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
+import { ApolloProvider } from "@apollo/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./redux/store";
 import "./index.scss";
+import { apolloClient } from "./utils/apolloClient";
 
 ReactDOM.render(
   <ReduxProvider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <ApolloProvider client={apolloClient}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </ApolloProvider>
   </ReduxProvider>,
   document.getElementById("root")
 );
