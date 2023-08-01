@@ -8,6 +8,7 @@ const timersSlice = createSlice({
     updatedSecond: 0,
     updatedMinute: 0,
     updatedHour: 0,
+    currentPageDate: new Date(),
   },
   reducers: {
     addTimer(state, action) {
@@ -81,6 +82,9 @@ const timersSlice = createSlice({
       localStorage.setItem("timers", JSON.stringify(timers));
       state.timers = timers;
     },
+    setCurrentPageDate(state, action) {
+      state.currentPageDate = action.payload;
+    },
   },
 });
 
@@ -91,5 +95,6 @@ export const {
   setCurrentTimer,
   incrementTimer,
   removeTimer,
+  setCurrentPageDate,
 } = timersSlice.actions;
 export default timersSlice.reducer;
