@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@apollo/client";
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useQuery } from "@apollo/client";
 
 import Form from "./components/Form";
 import "./style.scss";
@@ -16,7 +16,10 @@ import { getTimersEntries } from "../../graphql/mutations";
 
 export const AdvancedTimers = () => {
   const dispatch = useDispatch();
-  const { error, loading, data } = useQuery(getTimersEntries);
+  const state = useSelector((state) => state.timers);
+  const { error, loading, data } = useQuery(getTimersEntries, {
+    variables: { startTimeDay: state.currentPageDate },
+  });
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {

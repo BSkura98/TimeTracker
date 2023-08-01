@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const getTimersEntries = gql`
-  {
-    timerEntries {
+  query TimerEntries($startTimeDay: DateTime!) {
+    timerEntries(filterTimerEntryInput: { startTimeDay: $startTimeDay }) {
       id
       startTime
       endTime
