@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BootstrapForm from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
@@ -6,17 +6,21 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { useMutation } from "@apollo/client";
 
-import { addTimer, setCurrentPageDate } from "../../../redux/slices/timers";
 import { PlayIcon } from "../../../icons";
 import { CREATE_AND_START_TIMER_ENTRY } from "../../../graphql/mutations";
+import { setCurrentPageDate } from "../../../redux/slices/advancedTimers";
 
 const Form = () => {
   const dispatch = useDispatch();
   const [timerName, setTimerName] = useState("");
-  const state = useSelector((state) => state.timers);
+  const state = useSelector((state) => state.advancedTimers);
   const [createAndStartTimerEntry, { error }] = useMutation(
     CREATE_AND_START_TIMER_ENTRY
   );
+
+  useEffect(() => {
+    setTimerName(state.currentTimer?.timer?.name);
+  }, [state.currentTimer]);
 
   const handleAddTimerInput = (e) => {
     setTimerName(e.target.value);

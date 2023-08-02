@@ -19,12 +19,16 @@ const advancedTimersSlice = createSlice({
         s: 0,
         id: new Date().getTime(),
       });
-    //   localStorage.setItem("timers", JSON.stringify(state.timers));
+    },
+    setCurrentTimer(state, action) {
+      state.currentTimer = action.payload;
+    },
+    setCurrentPageDate(state, action) {
+      state.currentPageDate = action.payload;
     },
   },
 });
 
-export const {
-  startTimer,
-} = advancedTimersSlice.actions;
+export const { startTimer, setCurrentTimer, setCurrentPageDate } =
+  advancedTimersSlice.actions;
 export default advancedTimersSlice.reducer;
