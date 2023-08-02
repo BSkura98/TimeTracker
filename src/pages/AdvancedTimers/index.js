@@ -12,12 +12,12 @@ import Form from "./components/Form";
 import "./style.scss";
 import AdvancedTimer from "./components/AdvancedTimer";
 import { getTimers } from "../../redux/slices/timers";
-import { getTimersEntries } from "../../graphql/mutations";
+import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
 
 export const AdvancedTimers = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.timers);
-  const { error, loading, data } = useQuery(getTimersEntries, {
+  const { error, loading, data } = useQuery(GET_TIMERS_ENTRIES, {
     variables: { startTimeDay: state.currentPageDate },
   });
   const [entries, setEntries] = useState([]);
