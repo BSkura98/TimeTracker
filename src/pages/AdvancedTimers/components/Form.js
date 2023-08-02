@@ -6,17 +6,24 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { useMutation } from "@apollo/client";
 
-import { PlayIcon } from "../../../icons";
-import { CREATE_AND_START_TIMER_ENTRY } from "../../../graphql/mutations";
-import { setCurrentPageDate } from "../../../redux/slices/advancedTimers";
+import { PlayIcon, StopIcon } from "../../../icons";
+import {
+  CREATE_AND_START_TIMER_ENTRY,
+  STOP_TIMER_ENTRY,
+} from "../../../graphql/mutations";
+import {
+  setCurrentPageDate,
+  setCurrentTimer,
+} from "../../../redux/slices/advancedTimers";
 
 const Form = () => {
   const dispatch = useDispatch();
   const [timerName, setTimerName] = useState("");
   const state = useSelector((state) => state.advancedTimers);
-  const [createAndStartTimerEntry, { error }] = useMutation(
-    CREATE_AND_START_TIMER_ENTRY
-  );
+  const [createAndStartTimerEntry, { error: createAndStartTimerEntryError }] =
+    useMutation(CREATE_AND_START_TIMER_ENTRY);
+  const [stopTimerEntry, { error: stopTimerEntryError }] =
+    useMutation(STOP_TIMER_ENTRY);
 
   useEffect(() => {
     setTimerName(state.currentTimer?.timer?.name);
@@ -31,17 +38,35 @@ const Form = () => {
     dispatch(setCurrentPageDate(new Date(e.target.value)));
   };
 
-  const handleSubmit = (e) => {
+  const handleStartTimer = async (e) => {
     e.preventDefault();
-    createAndStartTimerEntry({
+    const result = await createAndStartTimerEntry({
       variables: {
         startTime: new Date(),
         timerName,
       },
     });
 
-    if (error) {
-      console.log(error);
+    if (createAndStartTimerEntryError) {
+      console.log(createAndStartTimerEntryError);
+    } else {
+      dispatch(setCurrentTimer(result.data.createTimerEntry));
+    }
+  };
+
+  const handleStopTimer = (e) => {
+    e.preventDefault();
+    stopTimerEntry({
+      variables: {
+        id: state.currentTimer.id,
+        endTime: new Date(),
+      },
+    });
+
+    if (stopTimerEntryError) {
+      console.log(stopTimerEntryError);
+    } else {
+      setTimerName("");
     }
   };
 
@@ -49,7 +74,9 @@ const Form = () => {
     <div className="add-timer-form-container">
       <Container fluid="md">
         <Stack className="add-timer-form-stack" direction="horizontal" gap={5}>
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={state.currentTimer ? handleStopTimer : handleStartTimer}
+          >
             <BootstrapForm.Control
               value={timerName}
               onChange={handleAddTimerInput}
@@ -57,8 +84,8 @@ const Form = () => {
               className="timer-input me-auto"
               placeholder="Timer"
             />
-            <Button className="add-timer-button" type="submit" variant="light">
-              <PlayIcon />
+            <Button type="submit" variant="light">
+              {state.currentTimer ? <StopIcon /> : <PlayIcon />}
             </Button>
           </form>
           <BootstrapForm.Control

@@ -14,3 +14,14 @@ export const CREATE_AND_START_TIMER_ENTRY = gql`
     }
   }
 `;
+
+export const STOP_TIMER_ENTRY = gql`
+  mutation updateTimerEntry($id: Int!, $endTime: DateTime!) {
+    updateTimerEntry(updateTimerEntryInput: { id: $id, endTime: $endTime }) {
+      id
+      timerId
+      startTime
+      endTime
+    }
+  }
+`;
