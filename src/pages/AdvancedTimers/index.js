@@ -12,21 +12,27 @@ import Form from "./components/Form";
 import "./style.scss";
 import AdvancedTimer from "./components/AdvancedTimer";
 import { getTimers } from "../../redux/slices/timers";
-import { getTimersEntries } from "../../graphql/mutations";
+import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
+import { setCurrentTimer } from "../../redux/slices/advancedTimers";
 
 export const AdvancedTimers = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.timers);
-  const { error, loading, data } = useQuery(getTimersEntries, {
+  const state = useSelector((state) => state.advancedTimers);
+  const { data } = useQuery(GET_TIMERS_ENTRIES, {
     variables: { startTimeDay: state.currentPageDate },
   });
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
     if (data) {
-      setEntries(data.timerEntries);
+      setEntries(data.timerEntries.filter((entry) => entry.endTime !== null));
+      dispatch(
+        setCurrentTimer(
+          data.timerEntries.find((entry) => entry.endTime === null)
+        )
+      );
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   useEffect(() => {
     dispatch(getTimers());
