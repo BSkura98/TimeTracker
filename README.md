@@ -24,14 +24,14 @@ The repository for the API can be found [here](https://github.com/BSkura98/time-
 - Create new timers
 - Edit timers
 - Delete timers
-- Save timers in local storage
+- Save timers in local storage (it will be replaced by saving data in database)
 
 To do list:
 * Save and display more detailed data regarding timers - in progress
-* Create API to save all the data - in progress
+* Connect client app with API - in progress
 
 ## Status
 
 Project is _in progress_
 
-This simple project was created in April 2021 and I returned to its development in July 2023.
+The first version of this project was created in April 2021 and its development was resumed in July 2023.
