@@ -25,3 +25,11 @@ export const STOP_TIMER_ENTRY = gql`
     }
   }
 `;
+
+export const REMOVE_TIMER_ENTRY = gql`
+  mutation updateTimerEntry($id: Int!) {
+    removeTimerEntry(id: $id){
+      timerId
+    }
+  }
+`;
