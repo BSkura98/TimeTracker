@@ -67,6 +67,7 @@ const Form = () => {
       console.log(stopTimerEntryError);
     } else {
       setTimerName("");
+      dispatch(setCurrentTimer(null));
     }
   };
 
