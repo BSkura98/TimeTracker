@@ -5,9 +5,25 @@ import Card from "react-bootstrap/Card";
 import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
 import { editTimerName } from "../../../redux/slices/timers";
+import { REMOVE_TIMER_ENTRY } from "../../../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 const AdvancedTimer = ({ timerEntry }) => {
   const dispatch = useDispatch();
+  const [removeTimerEntry, { error }] = useMutation(REMOVE_TIMER_ENTRY);
+
+  const handleRemoveTimerEntry = (e) => {
+    e.preventDefault();
+    removeTimerEntry({
+      variables: {
+        id: timerEntry.id,
+      },
+    });
+
+    if (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Card className="timer mb-1">
@@ -39,7 +55,7 @@ const AdvancedTimer = ({ timerEntry }) => {
                 <Button variant="outline">
                   <i className="fas fa-stopwatch"></i>
                 </Button>
-                <Button variant="outline">
+                <Button variant="outline" onClick={handleRemoveTimerEntry}>
                   <i className="fas fa-trash"></i>
                 </Button>
               </ButtonGroup>
