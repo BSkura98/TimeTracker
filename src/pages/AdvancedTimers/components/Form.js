@@ -35,7 +35,6 @@ const Form = ({ startTimer }) => {
 
   const handleStartTimer = async (e) => {
     e.preventDefault();
-    console.log(startTimer);
     startTimer(state.formTimerName);
   };
 
