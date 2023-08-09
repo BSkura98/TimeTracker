@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
@@ -14,6 +14,7 @@ import AdvancedTimer from "./components/AdvancedTimer";
 import { getTimers } from "../../redux/slices/timers";
 import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
 import { setCurrentTimer } from "../../redux/slices/advancedTimers";
+import { CREATE_AND_START_TIMER_ENTRY } from "../../graphql/mutations";
 
 export const AdvancedTimers = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,8 @@ export const AdvancedTimers = () => {
   const { data } = useQuery(GET_TIMERS_ENTRIES, {
     variables: { startTimeDay: state.currentPageDate },
   });
+  const [createAndStartTimerEntry, { error: createAndStartTimerEntryError }] =
+    useMutation(CREATE_AND_START_TIMER_ENTRY);
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
@@ -38,9 +41,24 @@ export const AdvancedTimers = () => {
     dispatch(getTimers());
   }, [dispatch]);
 
+  const startTimer = async (timerName) => {
+    const result = await createAndStartTimerEntry({
+      variables: {
+        startTime: new Date(),
+        timerName,
+      },
+    });
+
+    if (createAndStartTimerEntryError) {
+      console.log(createAndStartTimerEntryError);
+    } else {
+      dispatch(setCurrentTimer(result.data.createTimerEntry));
+    }
+  };
+
   return (
     <>
-      <Form />
+      <Form startTimer={startTimer} />
       <Container fluid="md" className="advanced-timers-container">
         <div className="chart-container">
           <Pie
@@ -59,7 +77,11 @@ export const AdvancedTimers = () => {
         <Col>
           {entries.map((entry) => (
             <Row>
-              <AdvancedTimer key={entry.id} timerEntry={entry} />
+              <AdvancedTimer
+                key={entry.id}
+                timerEntry={entry}
+                startTimer={startTimer}
+              />
             </Row>
           ))}
         </Col>

@@ -1,14 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useMutation } from "@apollo/client";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
 import { editTimerName } from "../../../redux/slices/timers";
 import { REMOVE_TIMER_ENTRY } from "../../../graphql/mutations";
-import { useMutation } from "@apollo/client";
+import { setFormTimerName } from "../../../redux/slices/advancedTimers";
 
-const AdvancedTimer = ({ timerEntry }) => {
+const AdvancedTimer = ({ timerEntry, startTimer }) => {
   const dispatch = useDispatch();
   const [removeTimerEntry, { error }] = useMutation(REMOVE_TIMER_ENTRY);
 
@@ -23,6 +24,12 @@ const AdvancedTimer = ({ timerEntry }) => {
     if (error) {
       console.log(error);
     }
+  };
+
+  const handleStartTimer = (e) => {
+    e.preventDefault();
+    dispatch(setFormTimerName(timerEntry.timer.name));
+    startTimer(timerEntry.timer.name);
   };
 
   return (
@@ -52,7 +59,7 @@ const AdvancedTimer = ({ timerEntry }) => {
             </Col>
             <Col xs={2}>
               <ButtonGroup>
-                <Button variant="outline">
+                <Button variant="outline" onClick={handleStartTimer}>
                   <i className="fas fa-stopwatch"></i>
                 </Button>
                 <Button variant="outline" onClick={handleRemoveTimerEntry}>
