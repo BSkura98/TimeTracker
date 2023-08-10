@@ -13,12 +13,15 @@ import {
   setCurrentTimer,
   setFormTimerName,
 } from "../../../redux/slices/advancedTimers";
+import { GET_TIMERS_ENTRIES } from "../../../graphql/queries";
 
 const Form = ({ startTimer }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.advancedTimers);
-  const [stopTimerEntry, { error: stopTimerEntryError }] =
-    useMutation(STOP_TIMER_ENTRY);
+  const [stopTimerEntry, { error: stopTimerEntryError }] = useMutation(
+    STOP_TIMER_ENTRY,
+    { refetchQueries: [GET_TIMERS_ENTRIES] }
+  );
 
   useEffect(() => {
     dispatch(setFormTimerName(state.currentTimer?.timer?.name));

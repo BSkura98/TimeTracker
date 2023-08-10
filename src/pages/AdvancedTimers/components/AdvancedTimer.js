@@ -8,10 +8,13 @@ import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 import { editTimerName } from "../../../redux/slices/timers";
 import { REMOVE_TIMER_ENTRY } from "../../../graphql/mutations";
 import { setFormTimerName } from "../../../redux/slices/advancedTimers";
+import { GET_TIMERS_ENTRIES } from "../../../graphql/queries";
 
 const AdvancedTimer = ({ timerEntry, startTimer }) => {
   const dispatch = useDispatch();
-  const [removeTimerEntry, { error }] = useMutation(REMOVE_TIMER_ENTRY);
+  const [removeTimerEntry, { error }] = useMutation(REMOVE_TIMER_ENTRY, {
+    refetchQueries: [GET_TIMERS_ENTRIES],
+  });
 
   const handleRemoveTimerEntry = (e) => {
     e.preventDefault();
