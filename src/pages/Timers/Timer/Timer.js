@@ -10,6 +10,7 @@ import {
   setCurrentTimer,
   editTimerName,
 } from "../../../redux/slices/timers";
+import { formatTime } from "../../../helpers/formatTime";
 
 const Timer = ({ timer }) => {
   const dispatch = useDispatch();
@@ -18,13 +19,6 @@ const Timer = ({ timer }) => {
   const deleteHandler = () => {
     dispatch(removeTimer(timer));
     startStopTimer(timer);
-  };
-
-  const getTimerTime = () => {
-    let h = timer.h >= 10 ? timer.h : "0" + timer.h;
-    let m = timer.m >= 10 ? timer.m : "0" + timer.m;
-    let s = timer.s >= 10 ? timer.s : "0" + timer.s;
-    return h + ":" + m + ":" + s;
   };
 
   const startStopTimer = (timer) => {
@@ -51,7 +45,9 @@ const Timer = ({ timer }) => {
               />
             </Col>
             <Col xs={3}>
-              <span className="timer-time">{getTimerTime()}</span>
+              <span className="timer-time">
+                {formatTime(timer.h, timer.m, timer.s)}
+              </span>
             </Col>
             <Col xs={2}>
               <ButtonGroup>

@@ -4,8 +4,13 @@ const advancedTimersSlice = createSlice({
   name: "advancedTimers",
   initialState: {
     currentTimer: null,
+    currentTimerTime: {
+      hour: 0,
+      minute: 0,
+      second: 0,
+    },
     currentPageDate: new Date(),
-    formTimerName: ""
+    formTimerName: "",
   },
   reducers: {
     setCurrentTimer(state, action) {
@@ -16,10 +21,40 @@ const advancedTimersSlice = createSlice({
     },
     setFormTimerName(state, action) {
       state.formTimerName = action.payload;
-    }
+    },
+    incrementCurrentTimerTime(state) {
+      let hours = state.currentTimerTime.hour;
+      let minutes = state.currentTimerTime.minute;
+      let seconds = state.currentTimerTime.second + 1;
+
+      if (seconds > 59) {
+        minutes++;
+        seconds = 0;
+      }
+      if (minutes > 59) {
+        hours++;
+        minutes = 0;
+      }
+
+      state.currentTimerTime.second = seconds;
+      state.currentTimerTime.minute = minutes;
+      state.currentTimerTime.hour = hours;
+    },
+    resetCurrentTimerTime(state) {
+      state.currentTimerTime = {
+        hour: 0,
+        minute: 0,
+        second: 0,
+      };
+    },
   },
 });
 
-export const { setCurrentTimer, setCurrentPageDate, setFormTimerName } =
-  advancedTimersSlice.actions;
+export const {
+  setCurrentTimer,
+  setCurrentPageDate,
+  setFormTimerName,
+  incrementCurrentTimerTime,
+  resetCurrentTimerTime
+} = advancedTimersSlice.actions;
 export default advancedTimersSlice.reducer;
