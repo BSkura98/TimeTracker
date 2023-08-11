@@ -19,7 +19,7 @@
     flex-direction: row;
 
     button {
-      margin-left: 0.5rem;
+      margin-left: 0.3rem;
       border: none;
 
       svg {
@@ -29,6 +29,12 @@
       }
     }
   }
+}
+
+.current-timer-time {
+  margin-right: 2rem;
+  margin-top: 0.1rem;
+  min-width: 3.9rem;
 }
 
 .timers-date {

@@ -9,11 +9,14 @@ import { useMutation } from "@apollo/client";
 import { PlayIcon, StopIcon } from "../../../icons";
 import { STOP_TIMER_ENTRY } from "../../../graphql/mutations";
 import {
+  incrementCurrentTimerTime,
+  resetCurrentTimerTime,
   setCurrentPageDate,
   setCurrentTimer,
   setFormTimerName,
 } from "../../../redux/slices/advancedTimers";
 import { GET_TIMERS_ENTRIES } from "../../../graphql/queries";
+import { formatTime } from "../../../helpers/formatTime";
 
 const Form = ({ startTimer }) => {
   const dispatch = useDispatch();
@@ -58,10 +61,25 @@ const Form = ({ startTimer }) => {
     }
   };
 
+  useEffect(() => {
+    let interv;
+
+    if (state.currentTimer?.id) {
+      interv = setInterval(() => {
+        dispatch(incrementCurrentTimerTime());
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(interv);
+      dispatch(resetCurrentTimerTime());
+    };
+  }, [dispatch, state.currentTimer]);
+
   return (
     <div className="add-timer-form-container">
       <Container fluid="md">
-        <Stack className="add-timer-form-stack" direction="horizontal" gap={5}>
+        <Stack className="add-timer-form-stack" direction="horizontal" gap={1}>
           <form
             onSubmit={state.currentTimer ? handleStopTimer : handleStartTimer}
           >
@@ -76,6 +94,15 @@ const Form = ({ startTimer }) => {
               {state.currentTimer ? <StopIcon /> : <PlayIcon />}
             </Button>
           </form>
+          <div className="current-timer-time">
+            {state.currentTimer
+              ? formatTime(
+                  state.currentTimerTime.hour,
+                  state.currentTimerTime.minute,
+                  state.currentTimerTime.second
+                )
+              : ""}
+          </div>
           <BootstrapForm.Control
             type="date"
             className="timers-date"
