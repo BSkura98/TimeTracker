@@ -9,6 +9,7 @@ import { useMutation } from "@apollo/client";
 import { PlayIcon, StopIcon } from "../../../icons";
 import { STOP_TIMER_ENTRY } from "../../../graphql/mutations";
 import {
+  calculateCurrentTimerTime,
   incrementCurrentTimerTime,
   resetCurrentTimerTime,
   setCurrentPageDate,
@@ -65,6 +66,7 @@ const Form = ({ startTimer }) => {
     let interv;
 
     if (state.currentTimer?.id) {
+      dispatch(calculateCurrentTimerTime(state.currentTimer?.startTime));
       interv = setInterval(() => {
         dispatch(incrementCurrentTimerTime());
       }, 1000);

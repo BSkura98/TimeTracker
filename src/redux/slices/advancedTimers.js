@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import differenceInMilliseconds from "date-fns/differenceInMilliseconds";
 
 const advancedTimersSlice = createSlice({
   name: "advancedTimers",
@@ -40,7 +41,20 @@ const advancedTimersSlice = createSlice({
       state.currentTimerTime.minute = minutes;
       state.currentTimerTime.hour = hours;
     },
+    calculateCurrentTimerTime(state, action) {
+      let milliseconds = differenceInMilliseconds(
+        new Date(),
+        new Date(action.payload)
+      );
+
+      state.currentTimerTime = {
+        hour: Math.floor(milliseconds / 1000 / 60 / 60),
+        minute: Math.floor((milliseconds / 1000 / 60) % 60),
+        second: Math.floor((milliseconds / 1000) % 60),
+      };
+    },
     resetCurrentTimerTime(state) {
+      console.log("xd");
       state.currentTimerTime = {
         hour: 0,
         minute: 0,
@@ -55,6 +69,7 @@ export const {
   setCurrentPageDate,
   setFormTimerName,
   incrementCurrentTimerTime,
-  resetCurrentTimerTime
+  calculateCurrentTimerTime,
+  resetCurrentTimerTime,
 } = advancedTimersSlice.actions;
 export default advancedTimersSlice.reducer;
