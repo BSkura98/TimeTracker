@@ -27,13 +27,12 @@ export const AdvancedTimers = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    if (data) {
+    if (data && data?.timerEntries.length > 0) {
       setEntries(data.timerEntries.filter((entry) => entry.endTime !== null));
-      dispatch(
-        setCurrentTimer(
-          data.timerEntries.find((entry) => entry.endTime === null)
-        )
+      const currentTimer = data.timerEntries.find(
+        (entry) => entry.endTime === null
       );
+      dispatch(setCurrentTimer(currentTimer));
     }
   }, [data, dispatch]);
 
