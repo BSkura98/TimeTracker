@@ -7,11 +7,11 @@ import { Pie } from "react-chartjs-2";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { differenceInMilliseconds } from "date-fns";
 
 import Form from "./components/Form";
 import "./style.scss";
 import AdvancedTimer from "./components/AdvancedTimer";
-import { getTimers } from "../../redux/slices/timers";
 import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
 import { setCurrentTimer } from "../../redux/slices/advancedTimers";
 import { CREATE_AND_START_TIMER_ENTRY } from "../../graphql/mutations";
@@ -26,6 +26,21 @@ export const AdvancedTimers = () => {
     useMutation(CREATE_AND_START_TIMER_ENTRY);
   const [entries, setEntries] = useState([]);
 
+  // TODO use this function to display proper statistics in pie chart
+  const calculateTotalTimersTimes = (timerEntries) => {
+    return timerEntries.reduce((timers, timerEntry) => {
+      if (timerEntry.endTime) {
+        const { timer } = timerEntry;
+        timers[timer.name] = timers[timer.name] ?? 0;
+        timers[timer.name] += differenceInMilliseconds(
+          new Date(timerEntry.endTime),
+          new Date(timerEntry.startTime)
+        );
+      }
+      return timers;
+    }, {});
+  };
+
   useEffect(() => {
     if (data && data?.timerEntries.length > 0) {
       setEntries(data.timerEntries.filter((entry) => entry.endTime !== null));
@@ -36,10 +51,6 @@ export const AdvancedTimers = () => {
       );
     }
   }, [data, dispatch]);
-
-  useEffect(() => {
-    dispatch(getTimers());
-  }, [dispatch]);
 
   const startTimer = async (timerName) => {
     const result = await createAndStartTimerEntry({

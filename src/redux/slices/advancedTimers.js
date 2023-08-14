@@ -54,7 +54,6 @@ const advancedTimersSlice = createSlice({
       };
     },
     resetCurrentTimerTime(state) {
-      console.log("xd");
       state.currentTimerTime = {
         hour: 0,
         minute: 0,
