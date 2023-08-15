@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation, useQuery } from "@apollo/client";
 // eslint-disable-next-line no-unused-vars
-// import { Chart as ChartJS } from "chart.js";
-// eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 import Container from "react-bootstrap/Container";
