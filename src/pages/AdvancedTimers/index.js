@@ -67,6 +67,8 @@ export const AdvancedTimers = () => {
           data.timerEntries.find((entry) => entry.endTime === null)
         )
       );
+    } else {
+      setEntries([]);
     }
   }, [data, dispatch]);
 
