@@ -47,11 +47,11 @@ const AdvancedTimer = ({ timerEntry, startTimer }) => {
     startTimer(timerEntry.timer.name);
   };
 
-  const handleEditTimerName = (e) => {
+  const handleEditTimerName = () => {
     editTimerEntry({
       variables: {
         id: timerEntry.id,
-        timerName: e.target.value,
+        timerName,
       },
     });
 
