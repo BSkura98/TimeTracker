@@ -1,20 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useMutation } from "@apollo/client";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 
-import { editTimerName } from "../../../redux/slices/timers";
-import { REMOVE_TIMER_ENTRY } from "../../../graphql/mutations";
+import {
+  EDIT_TIMER_ENTRY,
+  REMOVE_TIMER_ENTRY,
+} from "../../../graphql/mutations";
 import { setFormTimerName } from "../../../redux/slices/advancedTimers";
 import { GET_TIMERS_ENTRIES } from "../../../graphql/queries";
 
 const AdvancedTimer = ({ timerEntry, startTimer }) => {
   const dispatch = useDispatch();
-  const [removeTimerEntry, { error }] = useMutation(REMOVE_TIMER_ENTRY, {
-    refetchQueries: [GET_TIMERS_ENTRIES],
-  });
+  const [removeTimerEntry, { error: removeTimerEntryError }] = useMutation(
+    REMOVE_TIMER_ENTRY,
+    {
+      refetchQueries: [GET_TIMERS_ENTRIES],
+    }
+  );
+  const [editTimerEntry, { error: editTimerEntryError }] = useMutation(
+    EDIT_TIMER_ENTRY,
+    {
+      refetchQueries: [GET_TIMERS_ENTRIES],
+    }
+  );
+  const [timerName, setTimerName] = useState(timerEntry.timer.name);
 
   const handleRemoveTimerEntry = (e) => {
     e.preventDefault();
@@ -24,8 +36,8 @@ const AdvancedTimer = ({ timerEntry, startTimer }) => {
       },
     });
 
-    if (error) {
-      console.log(error);
+    if (removeTimerEntryError) {
+      console.log(removeTimerEntryError);
     }
   };
 
@@ -35,6 +47,19 @@ const AdvancedTimer = ({ timerEntry, startTimer }) => {
     startTimer(timerEntry.timer.name);
   };
 
+  const handleEditTimerName = (e) => {
+    editTimerEntry({
+      variables: {
+        id: timerEntry.id,
+        timerName: e.target.value,
+      },
+    });
+
+    if (editTimerEntryError) {
+      console.log(removeTimerEntryError);
+    }
+  };
+
   return (
     <Card className="timer mb-1">
       <Card.Body className="p-2" style={{ width: "100%" }}>
@@ -42,16 +67,10 @@ const AdvancedTimer = ({ timerEntry, startTimer }) => {
           <Row>
             <Col xs={6}>
               <Form.Control
-                value={timerEntry.timer.name}
+                value={timerName}
                 plaintext
-                onChange={(e) =>
-                  dispatch(
-                    editTimerName({
-                      id: timerEntry.id,
-                      name: e.target.value,
-                    })
-                  )
-                }
+                onChange={(e) => setTimerName(e.target.value)}
+                onBlur={handleEditTimerName}
               />
             </Col>
             <Col xs={4}>
