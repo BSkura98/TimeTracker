@@ -26,9 +26,20 @@ export const STOP_TIMER_ENTRY = gql`
   }
 `;
 
+export const EDIT_TIMER_ENTRY = gql`
+  mutation updateTimerEntry($id: Int!, $timerName: String!) {
+    updateTimerEntry(updateTimerEntryInput: { id: $id, timerName: $timerName }) {
+      id
+      timerId
+      startTime
+      endTime
+    }
+  }
+`;
+
 export const REMOVE_TIMER_ENTRY = gql`
   mutation updateTimerEntry($id: Int!) {
-    removeTimerEntry(id: $id){
+    removeTimerEntry(id: $id) {
       timerId
     }
   }
