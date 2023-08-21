@@ -14,6 +14,7 @@ The repository for the API can be found [here](https://github.com/BSkura98/time-
 * React
 * JavaScript
 * Redux
+* Apollo GraphQL
 * Bootstrap
 * SASS
 * Chart.js
