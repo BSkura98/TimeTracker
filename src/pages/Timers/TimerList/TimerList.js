@@ -23,7 +23,6 @@ const TimerList = () => {
     variables: { startTimeDay: state.currentPageDate },
   });
   console.log(data);
-  console.log(state);
 
   useEffect(() => {
     dispatch(getTimers());
