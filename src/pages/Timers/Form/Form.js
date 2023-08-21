@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BootstrapForm from "react-bootstrap/Form";
 import Stack from "react-bootstrap/Stack";
 import Container from "react-bootstrap/Container";
 
 import "./style.scss";
 import { addTimer } from "../../../redux/slices/timers";
+import { setCurrentPageDate } from "../../../redux/slices/advancedTimers";
 
 const Form = () => {
   const dispatch = useDispatch();
   const [timerName, setTimerName] = useState("");
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
+  const state = useSelector((state) => state.advancedTimers);
 
   const handleAddTimerInput = (e) => {
     setTimerName(e.target.value);
@@ -20,6 +21,11 @@ const Form = () => {
     e.preventDefault();
     dispatch(addTimer(timerName));
     setTimerName("");
+  };
+
+  const handleChangeDate = (e) => {
+    e.preventDefault();
+    dispatch(setCurrentPageDate(new Date(e.target.value)));
   };
 
   return (
@@ -38,11 +44,8 @@ const Form = () => {
           <BootstrapForm.Control
             type="date"
             className="timers-date"
-            value={date}
-            onChange={(e) => {
-              e.preventDefault();
-              setDate(e.target.value);
-            }}
+            value={state.currentPageDate.toISOString().split("T")[0]}
+            onChange={handleChangeDate}
           />
         </Stack>
       </Container>
