@@ -8,7 +8,7 @@ export const SimpleTimers = () => {
   return (
     <>
       <Form />
-      <div className="advanced-timers-page-content">
+      <div className="simple-timers-page-content">
         <TimerList />
       </div>
     </>
