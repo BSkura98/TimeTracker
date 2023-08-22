@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@apollo/client";
 import Container from "react-bootstrap/Container";
@@ -11,6 +11,7 @@ import "./style.scss";
 import { getTimers } from "../../../redux/slices/timers";
 import { incrementTimer } from "../../../redux/slices/timers";
 import { GET_TIMERS_ENTRIES } from "../../../graphql/queries";
+import { calculateTotalTimersTimes } from "../../../helpers/calculateTotalTimersTimes";
 
 const TimerList = () => {
   // TODO fully replace this state with state which is used for advanced timers page
@@ -18,11 +19,14 @@ const TimerList = () => {
 
   const state = useSelector((state) => state.advancedTimers);
   const dispatch = useDispatch();
-  // TODO use data to display list of timers fetched from API
   const { data, loading } = useQuery(GET_TIMERS_ENTRIES, {
     variables: { startTimeDay: state.currentPageDate },
   });
-  console.log(data);
+
+  const totalTimersTimes = useMemo(
+    () => calculateTotalTimersTimes(data?.timerEntries),
+    [data]
+  );
 
   useEffect(() => {
     dispatch(getTimers());
@@ -50,7 +54,7 @@ const TimerList = () => {
   const getLoadedContent = () => (
     <Container className="timer-list" fluid="md">
       <Col>
-        {simpleTimersState.timers?.map((timer) => (
+        {totalTimersTimes?.map((timer) => (
           <Row>
             <Timer key={timer.id} timer={timer} />
           </Row>
