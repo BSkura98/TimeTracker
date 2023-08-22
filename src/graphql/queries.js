@@ -7,6 +7,7 @@ export const GET_TIMERS_ENTRIES = gql`
       startTime
       endTime
       timer {
+        id
         name
       }
     }

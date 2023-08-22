@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -11,10 +11,12 @@ import {
   editTimerName,
 } from "../../../redux/slices/timers";
 import { formatTime } from "../../../helpers/formatTime";
+import { getTimeForMilliseconds } from "../../../helpers/getTimeForMilliseconds";
 
 const Timer = ({ timer }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.timers);
+  const time = useMemo(() => getTimeForMilliseconds(timer.time), [timer]);
 
   const deleteHandler = () => {
     dispatch(removeTimer(timer));
@@ -46,7 +48,7 @@ const Timer = ({ timer }) => {
             </Col>
             <Col xs={3}>
               <span className="timer-time">
-                {formatTime(timer.h, timer.m, timer.s)}
+                {formatTime(time.hour, time.minute, time.second)}
               </span>
             </Col>
             <Col xs={2}>
