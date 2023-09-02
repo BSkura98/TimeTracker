@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
+import { useMutation } from "@apollo/client";
 
 import "./style.scss";
 import {
@@ -12,11 +13,15 @@ import {
 } from "../../../redux/slices/timers";
 import { formatTime } from "../../../helpers/formatTime";
 import { getTimeForMilliseconds } from "../../../helpers/getTimeForMilliseconds";
+import { setFormTimerName } from "../../../redux/slices/advancedTimers";
+import { CREATE_AND_START_TIMER_ENTRY } from "../../../graphql/mutations";
 
-const Timer = ({ timer }) => {
+const Timer = ({ timer, startTime }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.timers);
   const time = useMemo(() => getTimeForMilliseconds(timer.time), [timer]);
+  const [createAndStartTimerEntry, { error: createAndStartTimerEntryError }] =
+    useMutation(CREATE_AND_START_TIMER_ENTRY);
 
   const deleteHandler = () => {
     dispatch(removeTimer(timer));
@@ -28,6 +33,23 @@ const Timer = ({ timer }) => {
       return dispatch(setCurrentTimer(null));
     }
     dispatch(setCurrentTimer(timer));
+  };
+
+  const handleStartTimer = async (e) => {
+    e.preventDefault();
+    dispatch(setFormTimerName(timer.name));
+    const result = await createAndStartTimerEntry({
+      variables: {
+        startTime: new Date(),
+        timerName: timer.name,
+      },
+    });
+
+    if (createAndStartTimerEntryError) {
+      console.log(createAndStartTimerEntryError);
+    } else {
+      dispatch(setCurrentTimer(result.data.createTimerEntry));
+    }
   };
 
   return (
@@ -53,12 +75,7 @@ const Timer = ({ timer }) => {
             </Col>
             <Col xs={2}>
               <ButtonGroup>
-                <Button
-                  onClick={() => {
-                    startStopTimer(timer);
-                  }}
-                  variant="outline"
-                >
+                <Button onClick={handleStartTimer} variant="outline">
                   <i className="fas fa-stopwatch"></i>
                 </Button>
                 <Button onClick={deleteHandler} variant="outline">
