@@ -6,14 +6,13 @@ import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 
 import "./style.scss";
-import {
-  removeTimer,
-  setCurrentTimer,
-  editTimerName,
-} from "../../../redux/slices/timers";
+import { removeTimer, editTimerName } from "../../../redux/slices/timers";
 import { formatTime } from "../../../helpers/formatTime";
 import { getTimeForMilliseconds } from "../../../helpers/getTimeForMilliseconds";
-import { setFormTimerName } from "../../../redux/slices/advancedTimers";
+import {
+  setCurrentTimer,
+  setFormTimerName,
+} from "../../../redux/slices/advancedTimers";
 import { CREATE_AND_START_TIMER_ENTRY } from "../../../graphql/mutations";
 
 const Timer = ({ timer, startTime }) => {
