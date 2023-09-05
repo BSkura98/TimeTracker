@@ -10,7 +10,7 @@ import {
   setCurrentTimer,
   setFormTimerName,
 } from "../../redux/slices/advancedTimers";
-import Form from "../AdvancedTimers/components/Form";
+import Form from "../../components/CurrentTimer";
 import { CREATE_AND_START_TIMER_ENTRY } from "../../graphql/mutations";
 
 export const SimpleTimers = () => {

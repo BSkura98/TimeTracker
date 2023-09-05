@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 
-import Form from "./components/Form";
+import Form from "../../components/CurrentTimer";
 import "./style.scss";
 import AdvancedTimer from "./components/AdvancedTimer";
 import { GET_TIMERS_ENTRIES } from "../../graphql/queries";

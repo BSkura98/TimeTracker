@@ -1,4 +1,4 @@
-@import "./../../../styles/colors";
+@import "./../../styles/colors";
 
 .add-timer-form-container {
   min-height: 4rem;
@@ -15,7 +15,26 @@
 
   form {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    button {
+      margin-left: 0.3rem;
+      border: none;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        fill: $textSelected;
+      }
+    }
   }
+}
+
+.current-timer-time {
+  margin-right: 2rem;
+  margin-top: 0.1rem;
+  min-width: 3.9rem;
 }
 
 .timers-date {

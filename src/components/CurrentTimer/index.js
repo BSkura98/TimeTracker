@@ -6,8 +6,9 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { useMutation } from "@apollo/client";
 
-import { PlayIcon, StopIcon } from "../../../icons";
-import { STOP_TIMER_ENTRY } from "../../../graphql/mutations";
+import "./style.scss";
+import { PlayIcon, StopIcon } from "../../icons";
+import { STOP_TIMER_ENTRY } from "../../graphql/mutations";
 import {
   calculateCurrentTimerTime,
   incrementCurrentTimerTime,
@@ -15,9 +16,9 @@ import {
   setCurrentPageDate,
   setCurrentTimer,
   setFormTimerName,
-} from "../../../redux/slices/advancedTimers";
-import { GET_TIMERS_ENTRIES } from "../../../graphql/queries";
-import { formatTime } from "../../../helpers/formatTime";
+} from "../../redux/slices/advancedTimers";
+import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
+import { formatTime } from "../../helpers/formatTime";
 
 const Form = ({ startTimer }) => {
   const dispatch = useDispatch();
