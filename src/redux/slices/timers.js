@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// TODO  remove this slice when it is no longer used anywhere
 const timersSlice = createSlice({
   name: "timers",
   initialState: {

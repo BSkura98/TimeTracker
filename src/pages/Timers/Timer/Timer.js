@@ -15,7 +15,7 @@ import {
 } from "../../../redux/slices/advancedTimers";
 import { CREATE_AND_START_TIMER_ENTRY } from "../../../graphql/mutations";
 
-const Timer = ({ timer, startTime }) => {
+const Timer = ({ timer }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.timers);
   const time = useMemo(() => getTimeForMilliseconds(timer.time), [timer]);

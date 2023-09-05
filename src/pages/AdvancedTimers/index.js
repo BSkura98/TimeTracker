@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 
-import Form from "./components/Form";
+import Form from "../../components/CurrentTimer";
 import "./style.scss";
 import AdvancedTimer from "./components/AdvancedTimer";
 import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
@@ -36,15 +36,17 @@ export const AdvancedTimers = () => {
   useEffect(() => {
     if (data && data?.timerEntries.length > 0) {
       setEntries(data.timerEntries.filter((entry) => entry.endTime !== null));
-      dispatch(
-        setCurrentTimer(
-          data.timerEntries.find((entry) => entry.endTime === null)
-        )
-      );
+      if (!state.currentTimer) {
+        dispatch(
+          setCurrentTimer(
+            data.timerEntries.find((entry) => entry.endTime === null)
+          )
+        );
+      }
     } else {
       setEntries([]);
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, state.currentTimer]);
 
   const startTimer = async (timerName) => {
     const result = await createAndStartTimerEntry({
