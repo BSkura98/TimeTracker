@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMutation, useQuery } from "@apollo/client";
 
-// import Form from "./Form/Form";
 import TimerList from "./TimerList/TimerList";
 import "./style.scss";
 import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
