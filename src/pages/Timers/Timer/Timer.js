@@ -1,12 +1,15 @@
 import React, { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { Container, Row, Col, ButtonGroup, Form } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
 import { useMutation } from "@apollo/client";
 
 import "./style.scss";
-import { removeTimer, editTimerName } from "../../../redux/slices/timers";
+import { editTimerName } from "../../../redux/slices/timers";
 import { formatTime } from "../../../helpers/formatTime";
 import { getTimeForMilliseconds } from "../../../helpers/getTimeForMilliseconds";
 import {
@@ -17,22 +20,9 @@ import { CREATE_AND_START_TIMER_ENTRY } from "../../../graphql/mutations";
 
 const Timer = ({ timer }) => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.timers);
   const time = useMemo(() => getTimeForMilliseconds(timer.time), [timer]);
   const [createAndStartTimerEntry, { error: createAndStartTimerEntryError }] =
     useMutation(CREATE_AND_START_TIMER_ENTRY);
-
-  const deleteHandler = () => {
-    dispatch(removeTimer(timer));
-    startStopTimer(timer);
-  };
-
-  const startStopTimer = (timer) => {
-    if (timer.id === state.currentTimer?.id) {
-      return dispatch(setCurrentTimer(null));
-    }
-    dispatch(setCurrentTimer(timer));
-  };
 
   const handleStartTimer = async (e) => {
     e.preventDefault();
@@ -56,7 +46,7 @@ const Timer = ({ timer }) => {
       <Card.Body className="p-2" style={{ width: "100%" }}>
         <Container>
           <Row>
-            <Col xs={7}>
+            <Col xs={8}>
               <Form.Control
                 value={timer.name}
                 plaintext
@@ -72,15 +62,10 @@ const Timer = ({ timer }) => {
                 {formatTime(time.hour, time.minute, time.second)}
               </span>
             </Col>
-            <Col xs={2}>
-              <ButtonGroup>
-                <Button onClick={handleStartTimer} variant="outline">
-                  <i className="fas fa-stopwatch"></i>
-                </Button>
-                <Button onClick={deleteHandler} variant="outline">
-                  <i className="fas fa-trash"></i>
-                </Button>
-              </ButtonGroup>
+            <Col xs={1}>
+              <Button onClick={handleStartTimer} variant="outline">
+                <i className="fas fa-stopwatch"></i>
+              </Button>
             </Col>
           </Row>
         </Container>
