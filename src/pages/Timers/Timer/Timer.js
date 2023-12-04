@@ -5,11 +5,9 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
 import { useMutation } from "@apollo/client";
 
 import "./style.scss";
-import { editTimerName } from "../../../redux/slices/timers";
 import { formatTime } from "../../../helpers/formatTime";
 import { getTimeForMilliseconds } from "../../../helpers/getTimeForMilliseconds";
 import {
@@ -47,15 +45,7 @@ const Timer = ({ timer }) => {
         <Container>
           <Row>
             <Col xs={8}>
-              <Form.Control
-                value={timer.name}
-                plaintext
-                onChange={(e) =>
-                  dispatch(
-                    editTimerName({ id: timer.id, name: e.target.value })
-                  )
-                }
-              />
+              <span>{timer.name}</span>
             </Col>
             <Col xs={3}>
               <span className="timer-time">
