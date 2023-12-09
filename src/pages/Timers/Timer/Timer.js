@@ -13,7 +13,7 @@ import { getTimeForMilliseconds } from "../../../helpers/getTimeForMilliseconds"
 import {
   setCurrentTimer,
   setFormTimerName,
-} from "../../../redux/slices/advancedTimers";
+} from "../../../redux/slices/timers";
 import { CREATE_AND_START_TIMER_ENTRY } from "../../../graphql/mutations";
 
 const Timer = ({ timer }) => {

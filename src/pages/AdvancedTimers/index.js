@@ -13,14 +13,14 @@ import Form from "../../components/CurrentTimer";
 import "./style.scss";
 import AdvancedTimer from "./components/AdvancedTimer";
 import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
-import { setCurrentTimer } from "../../redux/slices/advancedTimers";
+import { setCurrentTimer } from "../../redux/slices/timers";
 import { CREATE_AND_START_TIMER_ENTRY } from "../../graphql/mutations";
 import { chartColors } from "./chartColors";
 import { calculateTotalTimersTimes } from "./helpers";
 
 export const AdvancedTimers = () => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.advancedTimers);
+  const state = useSelector((state) => state.timers);
   const { data, loading } = useQuery(GET_TIMERS_ENTRIES, {
     variables: { startTimeDay: state.currentPageDate },
   });

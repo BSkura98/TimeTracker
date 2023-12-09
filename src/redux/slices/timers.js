@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import differenceInMilliseconds from "date-fns/differenceInMilliseconds";
+
 import { getTimeForMilliseconds } from "../../helpers/getTimeForMilliseconds";
 
-const advancedTimersSlice = createSlice({
-  name: "advancedTimers",
+const timersSlice = createSlice({
+  name: "timers",
   initialState: {
     currentTimer: null,
     currentTimerTime: {
@@ -67,5 +68,5 @@ export const {
   incrementCurrentTimerTime,
   calculateCurrentTimerTime,
   resetCurrentTimerTime,
-} = advancedTimersSlice.actions;
-export default advancedTimersSlice.reducer;
+} = timersSlice.actions;
+export default timersSlice.reducer;

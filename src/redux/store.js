@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import advancedTimersReducer from "./slices/advancedTimers";
+import timersReducer from "./slices/timers";
 
 export const store = configureStore({
   reducer: {
-    advancedTimers: advancedTimersReducer,
+    timers: timersReducer,
   },
 });
