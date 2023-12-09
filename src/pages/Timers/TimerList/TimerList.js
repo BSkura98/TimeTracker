@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
+import React, { useMemo } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -7,20 +6,13 @@ import Spinner from "react-bootstrap/Spinner";
 
 import Timer from "../Timer/Timer";
 import "./style.scss";
-import { getTimers } from "../../../redux/slices/timers";
 import { calculateTotalTimersTimes } from "../../../helpers/calculateTotalTimersTimes";
 
 const TimerList = ({ entries, loading }) => {
-  const dispatch = useDispatch();
-
   const totalTimersTimes = useMemo(
     () => calculateTotalTimersTimes(entries),
     [entries]
   );
-
-  useEffect(() => {
-    dispatch(getTimers());
-  }, [dispatch]);
 
   const getLoadingContent = () => (
     <div>
