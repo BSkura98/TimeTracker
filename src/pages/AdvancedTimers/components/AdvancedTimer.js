@@ -9,7 +9,7 @@ import {
   EDIT_TIMER_ENTRY,
   REMOVE_TIMER_ENTRY,
 } from "../../../graphql/mutations";
-import { setFormTimerName } from "../../../redux/slices/advancedTimers";
+import { setFormTimerName } from "../../../redux/slices/timers";
 import { GET_TIMERS_ENTRIES } from "../../../graphql/queries";
 
 const AdvancedTimer = ({ timerEntry, startTimer }) => {

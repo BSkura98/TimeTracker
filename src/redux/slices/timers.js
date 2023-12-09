@@ -1,51 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
+import differenceInMilliseconds from "date-fns/differenceInMilliseconds";
 
-// TODO  remove this slice when it is no longer used anywhere
+import { getTimeForMilliseconds } from "../../helpers/getTimeForMilliseconds";
+
 const timersSlice = createSlice({
   name: "timers",
   initialState: {
-    timers: [],
     currentTimer: null,
-    updatedSecond: 0,
-    updatedMinute: 0,
-    updatedHour: 0,
+    currentTimerTime: {
+      hour: 0,
+      minute: 0,
+      second: 0,
+    },
     currentPageDate: new Date(),
+    formTimerName: "",
   },
   reducers: {
-    addTimer(state, action) {
-      state.timers.push({
-        name: action.payload,
-        h: 0,
-        m: 0,
-        s: 0,
-        id: new Date().getTime(),
-      });
-      localStorage.setItem("timers", JSON.stringify(state.timers));
-    },
-    editTimerName(state, action) {
-      state.timers = state.timers.map((timer) =>
-        timer.id === action.payload.id
-          ? { ...timer, name: action.payload.name }
-          : timer
-      );
-      localStorage.setItem("timers", JSON.stringify(state.timers));
-    },
-    getTimers(state) {
-      const timersFromLocalStorage = localStorage.getItem("timers");
-      return { ...state, timers: JSON.parse(timersFromLocalStorage) ?? [] };
-    },
     setCurrentTimer(state, action) {
       state.currentTimer = action.payload;
-      if (action.payload) {
-        state.updatedSecond = action.payload.s;
-        state.updatedMinute = action.payload.m;
-        state.updatedHour = action.payload.h;
-      }
     },
-    incrementTimer(state) {
-      let hours = state.updatedHour;
-      let minutes = state.updatedMinute;
-      let seconds = state.updatedSecond + 1;
+    setCurrentPageDate(state, action) {
+      state.currentPageDate = action.payload;
+    },
+    setFormTimerName(state, action) {
+      state.formTimerName = action.payload;
+    },
+    incrementCurrentTimerTime(state) {
+      let hours = state.currentTimerTime.hour;
+      let minutes = state.currentTimerTime.minute;
+      let seconds = state.currentTimerTime.second + 1;
 
       if (seconds > 59) {
         minutes++;
@@ -56,46 +39,34 @@ const timersSlice = createSlice({
         minutes = 0;
       }
 
-      const newTimers = state.timers.map((item) => {
-        if (item.id === state.currentTimer.id) {
-          const updatedItem = {
-            ...item,
-            s: seconds,
-            m: minutes,
-            h: hours,
-          };
-          return updatedItem;
-        }
-        return item;
-      });
-
-      localStorage.setItem("timers", JSON.stringify(newTimers));
-
-      state.timers = newTimers;
-      state.updatedSecond = seconds;
-      state.updatedMinute = minutes;
-      state.updatedHour = hours;
+      state.currentTimerTime.second = seconds;
+      state.currentTimerTime.minute = minutes;
+      state.currentTimerTime.hour = hours;
     },
-    removeTimer(state, action) {
-      const timers = state.timers.filter(
-        (timer) => timer.id !== action.payload.id
+    calculateCurrentTimerTime(state, action) {
+      let milliseconds = differenceInMilliseconds(
+        new Date(),
+        new Date(action.payload)
       );
-      localStorage.setItem("timers", JSON.stringify(timers));
-      state.timers = timers;
+
+      state.currentTimerTime = getTimeForMilliseconds(milliseconds);
     },
-    setCurrentPageDate(state, action) {
-      state.currentPageDate = action.payload;
+    resetCurrentTimerTime(state) {
+      state.currentTimerTime = {
+        hour: 0,
+        minute: 0,
+        second: 0,
+      };
     },
   },
 });
 
 export const {
-  addTimer,
-  editTimerName,
-  getTimers,
   setCurrentTimer,
-  incrementTimer,
-  removeTimer,
   setCurrentPageDate,
+  setFormTimerName,
+  incrementCurrentTimerTime,
+  calculateCurrentTimerTime,
+  resetCurrentTimerTime,
 } = timersSlice.actions;
 export default timersSlice.reducer;

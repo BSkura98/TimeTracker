@@ -16,13 +16,13 @@ import {
   setCurrentPageDate,
   setCurrentTimer,
   setFormTimerName,
-} from "../../redux/slices/advancedTimers";
+} from "../../redux/slices/timers";
 import { GET_TIMERS_ENTRIES } from "../../graphql/queries";
 import { formatTime } from "../../helpers/formatTime";
 
 const Form = ({ startTimer }) => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.advancedTimers);
+  const state = useSelector((state) => state.timers);
   const [stopTimerEntry, { error: stopTimerEntryError }] = useMutation(
     STOP_TIMER_ENTRY,
     { refetchQueries: [GET_TIMERS_ENTRIES] }
